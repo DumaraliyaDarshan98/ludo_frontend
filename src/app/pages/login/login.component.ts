@@ -56,7 +56,7 @@ export class LoginComponent extends BaseLogin implements OnInit {
         }
       }, (error) => {
         this.showLoader = false;
-        this.notificationService.showError(error?.message || 'Something went wrong!');
+        this.notificationService.showError(error?.error?.error?.message || 'Something went wrong!');
       })
     }
   }
