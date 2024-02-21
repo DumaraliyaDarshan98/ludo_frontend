@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-12 d-flex align-items-center justify-content-center flex-column m-2 p-2">
+    <div class="d-flex justify-content-center w-50 fs-14 input-group mb-2">
+      <p class="fs-20 bold opacity-8 mb-2">Are you want sure to cancel the game ?</p>
+    </div>
+  </div>
+  <form>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group mb-0">
+          <select class="form-control" (change)="typewise($event)">
+            <option value="" disabled selected hidden>please select reason.</option>
+            <option value="Engineer">Reason 1</option>
+            <option value="Supervisor">Reason 2</option>
+            <option value="Architect">Reason 3</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 d-flex justify-content-between">
+      <button type="button" class="btn btn-danger m-1" (click)="closePopUp()">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-primary m-1" (click)="submit()">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

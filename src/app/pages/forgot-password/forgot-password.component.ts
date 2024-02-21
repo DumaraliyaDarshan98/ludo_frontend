@@ -51,7 +51,7 @@ export class ForgotPasswordComponent implements OnInit {
           this.showLoader = false;
         }
       }, (error) => {
-        this.notificationService.showError(error?.message || 'Something Went Wrong');
+        this.notificationService.showError(error?.error?.error?.message || 'Something Went Wrong');
         this.showLoader = false;
       });
     }

@@ -7,8 +7,8 @@
           <h3 class="text-center semibold txt-white pb-4">Register</h3>
           <form class="needs-validation" [formGroup]="signUpForm">
             <div class="d-flex flex-column input-group mb-3">
-              <input type="text" class="w-100 rounded  form-control fs-14" placeholder="Full name" formControlName="full_name"
-                aria-label="Full Name" required aria-describedby="basic-addon1">
+              <input type="text" class="w-100 rounded  form-control fs-14" placeholder="Full name"
+                formControlName="full_name" aria-label="Full Name" required aria-describedby="basic-addon1">
               <div>
                 <span class="text-danger"
                   *ngIf=" signUpForm.controls.full_name.touched && signUpForm.controls.full_name?.errors?.['required']">
@@ -23,30 +23,30 @@
 
             <div class="d-flex flex-column input-group mb-3">
               <div class="w-100 d-flex">
-              <span class="input-group-text" style="background-color: #e9ecef;">+91</span>
-              <input type="text" class="rounded  form-control fs-14" placeholder="Mobile Number" aria-label="Mobile Number"
-                required (keypress)="NumberOnly($event)" minlength="10" maxlength="10" formControlName="mobile_no"
-                aria-describedby="basic-addon1">
+                <span class="input-group-text" style="background-color: #e9ecef;">+91</span>
+                <input type="text" class="rounded  form-control fs-14" placeholder="Mobile Number"
+                  aria-label="Mobile Number" required (keypress)="NumberOnly($event)" minlength="10" maxlength="10"
+                  formControlName="mobile_no" aria-describedby="basic-addon1">
               </div>
-                <div>
-              <div class="invalid-feedback"> Please enter valid number</div>
-              <span class="text-danger" *ngIf="
+              <div>
+                <div class="invalid-feedback"> Please enter valid number</div>
+                <span class="text-danger" *ngIf="
                             signUpForm.controls.mobile_no?.touched &&
                             signUpForm.controls.mobile_no?.errors?.['required']">
-                Please enter mobile number
-              </span>
-              <span class="text-danger" *ngIf="
+                  Please enter mobile number
+                </span>
+                <span class="text-danger" *ngIf="
                             signUpForm.controls.mobile_no?.touched &&
                             signUpForm.controls.mobile_no?.errors?.['pattern']">
-                Please enter valid mobile number
-              </span>
-            </div>
+                  Please enter valid mobile number
+                </span>
+              </div>
             </div>
 
             <div class="d-flex flex-column input-group mb-3">
               <input type="email" class="rounded  w-100 form-control fs-14" placeholder="Email id" aria-label="Email id"
                 formControlName="email" required aria-describedby="basic-addon1">
-                <div>
+              <div>
                 <span class="text-danger" *ngIf="
                   signUpForm.controls.email?.touched &&
                   signUpForm.controls.email?.errors?.['required']">
@@ -61,29 +61,36 @@
             </div>
 
             <div class="d-flex flex-column  input-group mb-3">
-              <input [type]="password" formControlName="password" class="rounded  w-100 form-control fs-14" placeholder="Password"
-                aria-label="Password" aria-describedby="basic-addon1">
-            <div>
-              <span class="showicon" *ngIf="!showPassword" (click)="showHidePass()"><i class="bi bi-eye-fill"></i></span>
-              <span class="showicon" *ngIf="showPassword" (click)="showHidePass()"><i
-                  class="bi bi-eye-slash-fill"></i></span>
-              <span class="text-danger" *ngIf="
+              <input [type]="password" formControlName="password" class="rounded  w-100 form-control fs-14"
+                placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+              <div>
+                <span class="showicon" *ngIf="!showPassword" (click)="showHidePass()"><i
+                    class="bi bi-eye-fill"></i></span>
+                <span class="showicon" *ngIf="showPassword" (click)="showHidePass()"><i
+                    class="bi bi-eye-slash-fill"></i></span>
+                <span class="text-danger" *ngIf="
                 signUpForm.controls.password?.touched &&
                 signUpForm.controls.password?.errors?.['required']
             ">
-                Please enter valid password
-              </span>
-              <span class="text-danger" *ngIf="
+                  Please enter valid password
+                </span>
+                <span class="text-danger" *ngIf="
                 signUpForm.controls.password?.touched &&
                 signUpForm.controls.password?.errors?.['pattern']
             ">
-                Password length must be 8 or more and at least 1 uppercase letter, 1 number and
-                1 special character!
-              </span>
-            </div>
+                  Password length must be 8 or more and at least 1 uppercase letter, 1 number and
+                  1 special character!
+                </span>
+              </div>
             </div>
 
-            <button type="button" (click)="submitForm()" class="w-100 fs-16 txt-white btn btn-danger py-2 h-3 mb-2">Register</button>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control fs-14" placeholder="Code" aria-label="code"
+                formControlName="code" required aria-describedby="basic-addon1">
+            </div>
+
+            <button type="button" (click)="submitForm()"
+              class="w-100 fs-16 txt-white btn btn-danger py-2 h-3 mb-2">Register</button>
             <p class="text-center txt-white">Already have an account? <a [routerLink]="['/login']">Login</a></p>
           </form>
         </div>

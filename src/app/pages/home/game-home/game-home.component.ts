@@ -18,6 +18,7 @@ export class GameHomeComponent implements OnInit {
   loginUser: any;
   walletAmount: any = 0;
   battleList: any[] = [];
+  runningBattleList : any[] = [];
 
   battleAmount: FormControl = new FormControl();
 
@@ -48,7 +49,8 @@ export class GameHomeComponent implements OnInit {
     this.battleList = [];
     this.gameService.getBattleList().subscribe((response) => {
       if (response?.status == SUCCESS) {
-        this.battleList = response?.payload?.data;
+        this.battleList = response?.payload?.data?.gameList;
+        this.runningBattleList = response?.payload?.data?.runningGameList;
         console.log(this.battleList)
       } else {
         this.notificationService.showError('Something went wrong.');
@@ -92,7 +94,8 @@ export class GameHomeComponent implements OnInit {
 
           this.gameService.createGameTable(payload).subscribe((response) => {
             if (response?.status == SUCCESS) {
-              this.router.navigate([`/home/show-game-code/${response?.payload?.data?.id}`]);
+              this.getBattleList()
+              // this.router.navigate([`/home/show-game-code/${response?.payload?.data?.id}`]);
               this.notificationService.showSuccess(response?.message || 'Game created.');
             } else {
               this.notificationService.showError('Please Retry Game Not Created');
@@ -114,7 +117,8 @@ export class GameHomeComponent implements OnInit {
 
       this.gameService.createGameTable(payload).subscribe((response) => {
         if (response?.status == SUCCESS) {
-          this.router.navigate([`/home/show-game-code/${response?.payload?.data?.id}`]);
+          this.getBattleList()
+          // this.router.navigate([`/home/show-game-code/${response?.payload?.data?.id}`]);
           this.notificationService.showSuccess(response?.message || 'Game created.');
         } else {
           this.notificationService.showError('Please Retry Game Not Created');
@@ -149,7 +153,7 @@ export class GameHomeComponent implements OnInit {
           this.gameService.playGame(payload).subscribe((response) => {
             if (response?.status == SUCCESS) {
               // this.getBattleList()
-              this.router.navigate([`/home/show-game-code/${battleId}`]);
+              // this.router.navigate([`/home/show-game-code/${battleId}`]);
             } else {
               this.notificationService.showError('Something Went Wrong');
             }
@@ -170,7 +174,7 @@ export class GameHomeComponent implements OnInit {
       this.gameService.playGame(payload).subscribe((response) => {
         if (response?.status == SUCCESS) {
           // this.getBattleList()
-          this.router.navigate([`/home/show-game-code/${battleId}`])
+          // this.router.navigate([`/home/show-game-code/${battleId}`])
         } else {
           this.notificationService.showError('Something Went Wrong');
         }

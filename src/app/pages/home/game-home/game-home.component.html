@@ -7,6 +7,41 @@
                 <button type="button" class="btn btn-primary px-4 fs-14" (click)="createBattle()">SET</button>
             </div>
         </div>
+
+        <div class="row flex-column">
+            <ng-container *ngFor="let battle of runningBattleList; let index = index;">
+                <div class="col-12 mb-2  card-list">
+                    <div class="b-1 shadow-sm rounded px-0 ">
+                        <p class="fs-14 border-bottom mb-0 p-2 px-3"><span class="semibold">CHALLENGE FROM</span> <span
+                                class="fs-12 text-primary ms-2 opacity-8"> {{battle?.p1_name}} </span></p>
+                        <div class="d-flex align-items-center p-2 px-3">
+                            <div class="me-3">
+                                <span class="d-flex flex-column">
+                                    <span class="text-uppercase fs-10 opacity-8"> Entry FEE</span>
+                                    <span class="fs-14 d-flex align-items-center semibold">
+                                        <img class="me-1" src="../../../../assets/img/money.png" height="24px" width="24px"
+                                            alt="money">
+                                        {{ battle?.amount }}
+                                    </span>
+                                </span>
+                            </div>
+                            <button class="btn btn-danger fs-14 px-3 mx-auto">Requested</button>
+                            <div>
+                                <span class="d-flex flex-column">
+                                    <span class="text-uppercase fs-10 opacity-8"> Prize </span>
+                                    <span class="fs-14 d-flex align-items-center semibold">
+                                        <img class="me-1" src="../../../../assets/img/money.png" height="24px" width="24px"
+                                            alt="money">
+                                        {{ battle?.winner_amount }}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
         <div class="w-100 mb-3">
             <div class="row">
                 <div class="col-12 mb-3">

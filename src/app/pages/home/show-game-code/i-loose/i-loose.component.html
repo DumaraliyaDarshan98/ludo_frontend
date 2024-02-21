@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-12 d-flex align-items-center justify-content-center flex-column m-2 p-2">
+    <div class="d-flex justify-content-center w-50 fs-14 input-group mb-3">
+      <p class="fs-20 bold opacity-8 mb-2">Sorry you lost game.</p>
+    </div>
+  </div>
+  <form (ngSubmit)="submitForm()">
+    <!-- <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1">is yes</label><br> -->
+    <div class="col-12 d-flex justify-content-between">
+      <button type="button" class="btn btn-danger m-1" (click)="closePopUp()">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary m-1">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
