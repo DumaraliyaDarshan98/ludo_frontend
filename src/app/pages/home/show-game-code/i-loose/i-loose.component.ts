@@ -24,20 +24,20 @@ export class ILooseComponent implements OnInit {
   }
 
   submitForm() {
-    const data = new FormData();
-    data.append('game_table_id', this.id || '');
-    this.showgameservice.loosegame(data).subscribe((response) => {
+    // const data = new FormData();
+    const payload = {
+      game_table_id : this.id
+    }
+    this.showgameservice.loosegame(payload).subscribe((response) => {
       if (response?.status == SUCCESS) {
-
         this.notificationService.showSuccess('Submit successfully !');
       } else {
         this.notificationService.showError(response?.message);
-
       }
+      this.closePopUp();
     }, (error) => {
       this.notificationService.showError(error?.message);
     });
-    this.closePopUp();
   }
 
   closePopUp(result?: any) {

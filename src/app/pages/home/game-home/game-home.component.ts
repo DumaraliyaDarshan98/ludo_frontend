@@ -33,6 +33,7 @@ export class GameHomeComponent implements OnInit {
     this.loginUser = this.localStorageService.getLogger();
     this.walletService.userTotalAmount$.subscribe((amount) => this.walletAmount = amount);
     this.gameService.gameBattleList$.subscribe((list) => this.battleList = list);
+    this.gameService.requestBattleList$.subscribe((list) => this.runningBattleList = list);
   }
 
   ngOnInit(): void {
@@ -47,11 +48,11 @@ export class GameHomeComponent implements OnInit {
   // get battle list
   public async getBattleList() {
     this.battleList = [];
+    this.runningBattleList = [];
     this.gameService.getBattleList().subscribe((response) => {
       if (response?.status == SUCCESS) {
-        this.battleList = response?.payload?.data?.gameList;
-        this.runningBattleList = response?.payload?.data?.runningGameList;
-        console.log(this.battleList)
+        this.battleList = response?.payload?.data?.gameList || [];
+        this.runningBattleList = response?.payload?.data?.runningGameList || [];
       } else {
         this.notificationService.showError('Something went wrong.');
       }
@@ -182,7 +183,14 @@ export class GameHomeComponent implements OnInit {
         this.notificationService.showError('Something Went Wrong');
       });
     }
+  }
 
+  errorMessageForRunningGame() {
+    this.notificationService.showError('Please Complete The Running Game!');
+  }
 
+  // redirect to battle page
+  public redirectToCodePage(battleId: number) {
+    this.router.navigate([`/home/show-game-code/${battleId}`]);
   }
 }

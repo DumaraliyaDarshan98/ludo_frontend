@@ -8,8 +8,8 @@ import { SUCCESS } from 'src/app/pages/constant/response-status.const';
 
 export enum APIEndPOint {
   CREATE_BATTLE = "/game/get-game-code",
-  GET_GAME_HISTORY = "/game/get-battle-list",
   PLAY_GAME = "/game/pay-game",
+  GET_GAME_HISTORY = "/game/get-battle-list",
   GET_SINGLE_BATTLE = '/game/get-game-table/BATTLEIID',
   GET_USER_GAME_HISTORY = '/game/get-game-history'
 }
@@ -22,6 +22,9 @@ export class GameService {
 
   private battleList = new BehaviorSubject<any>([]);
   gameBattleList$ = this.battleList.asObservable();
+
+  private requestBattleList = new BehaviorSubject<any>([]);
+  requestBattleList$ = this.requestBattleList.asObservable();
 
   constructor(
     private httpClient: HttpClient,
@@ -65,8 +68,9 @@ export class GameService {
       .post<any>(this.baseUrl + APIEndPOint.PLAY_GAME, payload);
   }
 
-  setBattleList(list: any[]) {
-    this.battleList.next(list);
+  setBattleList(list: any) {
+    this.battleList.next(list?.gameList);
+    this.requestBattleList.next(list?.runningGameList);
   }
 
   //  get game history for particular player or user
