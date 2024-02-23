@@ -11,7 +11,8 @@ export enum APIEndPOint {
   PLAY_GAME = "/game/pay-game",
   GET_GAME_HISTORY = "/game/get-battle-list",
   GET_SINGLE_BATTLE = '/game/get-game-table/BATTLEIID',
-  GET_USER_GAME_HISTORY = '/game/get-game-history'
+  GET_USER_GAME_HISTORY = '/game/get-game-history',
+  VERIFY_GAME_RESULT = '/game/verify-game-result'
 }
 
 @Injectable({
@@ -77,5 +78,11 @@ export class GameService {
   getGameHistoryForUser(): Observable<any> {
     return this.httpClient
       .get<any>(this.baseUrl + APIEndPOint.GET_USER_GAME_HISTORY);
+  }
+
+  // verify game result component
+  verifyGameResult(payload: any): Observable<any> {
+    return this.httpClient
+      .post<any>(this.baseUrl + APIEndPOint.VERIFY_GAME_RESULT, payload);
   }
 }

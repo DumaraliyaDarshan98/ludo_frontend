@@ -77,9 +77,9 @@
                                 </span>
                             </div>
 
-                            <button *ngIf="runningBattleList[0]?.status != 3" class="btn btn-warning fs-14 px-3 mx-auto" (click)="playGame(battle?.id)">PLAY</button>
+                            <button *ngIf="runningBattleList[0]?.status != 3 && !isVerify" class="btn btn-warning fs-14 px-3 mx-auto" (click)="playGame(battle?.id)">PLAY</button>
 
-                            <button *ngIf="runningBattleList[0]?.status == 3" class="btn btn-warning fs-14 px-3 mx-auto" (click)="errorMessageForRunningGame()">PLAY</button>
+                            <button *ngIf="runningBattleList[0]?.status == 3 && !isVerify" class="btn btn-warning fs-14 px-3 mx-auto" (click)="errorMessageForRunningGame()">PLAY</button>
 
                             <div>
                                 <span class="d-flex flex-column">

@@ -19,6 +19,7 @@ export class GameHomeComponent implements OnInit {
   walletAmount: any = 0;
   battleList: any[] = [];
   runningBattleList : any[] = [];
+  isVerify : boolean = false;
 
   battleAmount: FormControl = new FormControl();
 
@@ -53,6 +54,9 @@ export class GameHomeComponent implements OnInit {
       if (response?.status == SUCCESS) {
         this.battleList = response?.payload?.data?.gameList || [];
         this.runningBattleList = response?.payload?.data?.runningGameList || [];
+        if(this.runningBattleList && this.runningBattleList[0]?.status == 3) {
+
+        }
       } else {
         this.notificationService.showError('Something went wrong.');
       }
@@ -192,5 +196,14 @@ export class GameHomeComponent implements OnInit {
   // redirect to battle page
   public redirectToCodePage(battleId: number) {
     this.router.navigate([`/home/show-game-code/${battleId}`]);
+  }
+
+  verifyGameResult(gameId : number) {
+    const payload = {
+      game_table_id : gameId
+    }
+    this.gameService.verifyGameResult(payload).subscribe((response) => {
+
+    })
   }
 }
