@@ -10,9 +10,7 @@ import { ShowGameCodeService } from 'src/app/services/show-game-code/show-game-c
   styleUrls: ['./i-loose.component.css']
 })
 export class ILooseComponent implements OnInit {
-
-  id: any;
-
+  battleId: any;
   constructor(
     private activeModal: NgbActiveModal,
     private showgameservice: ShowGameCodeService,
@@ -20,13 +18,12 @@ export class ILooseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = localStorage.getItem("id")
   }
 
   submitForm() {
     // const data = new FormData();
     const payload = {
-      game_table_id : this.id
+      game_table_id : this.battleId
     }
     this.showgameservice.loosegame(payload).subscribe((response) => {
       if (response?.status == SUCCESS) {

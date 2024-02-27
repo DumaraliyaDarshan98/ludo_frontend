@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center justify-content-center flex-column" >
             <p class="fs-16 bold opacity-8 mb-2">CREATE A BATTLE!</p>
             <div class="d-flex justify-content-center w-100 fs-14 input-group mb-3" *ngIf="runningBattleList[0]?.status != 3">
-                <input type="text" [formControl]="battleAmount" class="form-control fs-14" style="width: 200px;max-width: 200px;" placeholder="Amount" aria-label="Amount" aria-describedby="basic-addon2">
+                <input type="number" [formControl]="battleAmount" class="form-control fs-14" style="width: 200px;max-width: 200px;" placeholder="Amount" aria-label="Amount" aria-describedby="basic-addon2">
                 <button type="button" class="btn btn-primary px-4 fs-14" (click)="createBattle()">SET</button>
             </div>
         </div>
@@ -77,9 +77,9 @@
                                 </span>
                             </div>
 
-                            <button *ngIf="runningBattleList[0]?.status != 3 && !isVerify" class="btn btn-warning fs-14 px-3 mx-auto" (click)="playGame(battle?.id)">PLAY</button>
+                            <button *ngIf="runningBattleList[0]?.status != 3" class="btn btn-warning fs-14 px-3 mx-auto" (click)="playGame(battle?.id)">PLAY</button>
 
-                            <button *ngIf="runningBattleList[0]?.status == 3 && !isVerify" class="btn btn-warning fs-14 px-3 mx-auto" (click)="errorMessageForRunningGame()">PLAY</button>
+                            <button *ngIf="runningBattleList[0]?.status == 3" class="btn btn-warning fs-14 px-3 mx-auto" (click)="errorMessageForRunningGame()">PLAY</button>
 
                             <div>
                                 <span class="d-flex flex-column">

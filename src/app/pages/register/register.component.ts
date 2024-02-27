@@ -21,7 +21,7 @@ export class RegisterComponent extends BaseLogin implements OnInit {
     mobile_no: new FormControl("", [Validators.required, Validators.pattern(Patterns.mobile)]),
     email: new FormControl("", [Validators.required, Validators.pattern(Patterns.email)]),
     password: new FormControl("", [Validators.required]),
-    code: new FormControl(""),
+    code: new FormControl(null),
   };
 
   signUpForm = new FormGroup(this.defaultSignUpForm, [
@@ -53,7 +53,7 @@ export class RegisterComponent extends BaseLogin implements OnInit {
 
   submitForm() {
     this.signUpForm.markAllAsTouched();
-    if (this.signUpForm.valid) {
+    // if (this.signUpForm.valid) {
       this.showLoader = true;
       this.authService.registerUser(this.signUpForm.value).subscribe((result) => {
         if (result?.status == SUCCESS) {
@@ -68,7 +68,7 @@ export class RegisterComponent extends BaseLogin implements OnInit {
         this.notificationService.showError(error?.error?.error?.message || 'Something went wrong!');
         this.showLoader = false;
       });
-    }
+    // }
   }
 
 }

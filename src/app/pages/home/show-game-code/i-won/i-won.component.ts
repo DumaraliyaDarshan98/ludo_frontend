@@ -14,9 +14,9 @@ import { ShowGameCodeService } from 'src/app/services/show-game-code/show-game-c
 export class IWonComponent implements OnInit {
 
   imageToUpload: any;
-  id: any;
+  battleId: any;
   imageSrc!: any;
-  
+
   constructor(
     private activeModal: NgbActiveModal,
     private showgameservice: ShowGameCodeService,
@@ -24,7 +24,7 @@ export class IWonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = localStorage.getItem("id")
+    console.log('asdds', this.battleId);
   }
 
   addWonForm = {
@@ -36,19 +36,17 @@ export class IWonComponent implements OnInit {
   submitForm() {
     const data = new FormData();
     data.append('file', this.imageToUpload);
-    data.append('game_table_id', this.id || '');
+    data.append('game_table_id', this.battleId || '');
     this.showgameservice.wingame(data).subscribe((response) => {
       if (response?.status == SUCCESS) {
-
         this.notificationService.showSuccess('Submit successfully !');
       } else {
         this.notificationService.showError(response?.message);
-
       }
+      this.closePopUp();
     }, (error) => {
-      this.notificationService.showError(error?.message);
+      this.notificationService.showError(error?.error?.error?.message || 'Error');
     });
-    this.closePopUp();
   }
 
   closePopUp(result?: any) {
@@ -67,7 +65,6 @@ export class IWonComponent implements OnInit {
     }
   }
 
-  
   handleFile(file: File) {
     if (file) {
       const reader = new FileReader();

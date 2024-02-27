@@ -6,19 +6,23 @@
   </div>
   <form>
     <div class="row">
-      <div class="col-12">
-        <div class="form-group mb-0">
-          <select class="form-control" (change)="typewise($event)">
+      <div class="col-12 mb-2">
+        <div class="form-group mb-0 p-2">
+          <label for="">Select Reason</label>
+          <select class="form-control" [formControl]="reason_control">
             <option value="" disabled selected hidden>please select reason.</option>
-            <option value="Engineer">Reason 1</option>
+            <ng-container *ngFor="let item of reasonList">
+              <option [value]="item?.id">{{ item?.reason }}</option>
+            </ng-container>
+            <!-- <option value="Engineer">Reason 1</option>
             <option value="Supervisor">Reason 2</option>
-            <option value="Architect">Reason 3</option>
+            <option value="Architect">Reason 3</option> -->
           </select>
         </div>
       </div>
     </div>
-    
-    <div class="col-12 d-flex justify-content-between">
+
+    <div class="col-12 d-flex justify-content-between mt-2">
       <button type="button" class="btn btn-danger m-1" (click)="closePopUp()">
         Cancel
       </button>

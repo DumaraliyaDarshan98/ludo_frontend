@@ -41,7 +41,7 @@ export class ShowGameCodeComponent implements OnInit {
         if (this.battleDetails?.is_running == 2) {
           this.router.navigateByUrl('/home/game-home');
         }
-        localStorage.setItem("id", this.battleId);
+        // localStorage.setItem("id", this.battleId);
         console.log('this.battleDetails', this.battleDetails);
         this.notificationService.showSuccess('Game Code Found');
       } else {
@@ -52,24 +52,33 @@ export class ShowGameCodeComponent implements OnInit {
     });
   }
 
+  // open win modal
   openWinModal() {
     const modalRef = this.modalService.open(IWonComponent);
 
+    modalRef.componentInstance.battleId = this.battleId;
+
     modalRef.result.then((result) => {
       console.log('result : resultresult : ', result)
     })
   }
 
+  // open cancel modal
   openCancelModal() {
     const modalRef = this.modalService.open(CancelComponent);
 
+    modalRef.componentInstance.battleId = this.battleId;
+
     modalRef.result.then((result) => {
       console.log('result : resultresult : ', result)
     })
   }
 
+  // open loose modal
   openLooseModal() {
     const modalRef = this.modalService.open(ILooseComponent);
+
+    modalRef.componentInstance.battleId = this.battleId;
 
     modalRef.result.then((result) => {
       console.log('result : resultresult : ', result)

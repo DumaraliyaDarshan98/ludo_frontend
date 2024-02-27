@@ -12,7 +12,7 @@ export enum APIEndPOint {
   GET_GAME_HISTORY = "/game/get-battle-list",
   GET_SINGLE_BATTLE = '/game/get-game-table/BATTLEIID',
   GET_USER_GAME_HISTORY = '/game/get-game-history',
-  VERIFY_GAME_RESULT = '/game/verify-game-result'
+  GET_CANCEL_RESULT = '/game/cancel-reason-list'
 }
 
 @Injectable({
@@ -81,8 +81,8 @@ export class GameService {
   }
 
   // verify game result component
-  verifyGameResult(payload: any): Observable<any> {
+  getCancelReasonList(): Observable<any> {
     return this.httpClient
-      .post<any>(this.baseUrl + APIEndPOint.VERIFY_GAME_RESULT, payload);
+      .get<any>(this.baseUrl + APIEndPOint.GET_CANCEL_RESULT);
   }
 }
