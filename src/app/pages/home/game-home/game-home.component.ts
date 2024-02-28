@@ -18,7 +18,7 @@ export class GameHomeComponent implements OnInit {
   loginUser: any;
   walletAmount: any = 0;
   battleList: any[] = [];
-  runningBattleList : any[] = [];
+  // runningBattleList : any[] = [];
 
   battleAmount: FormControl = new FormControl();
 
@@ -33,7 +33,7 @@ export class GameHomeComponent implements OnInit {
     this.loginUser = this.localStorageService.getLogger();
     this.walletService.userTotalAmount$.subscribe((amount) => this.walletAmount = amount);
     this.gameService.gameBattleList$.subscribe((list) => this.battleList = list);
-    this.gameService.requestBattleList$.subscribe((list) => this.runningBattleList = list);
+    // this.gameService.requestBattleList$.subscribe((list) => this.runningBattleList = list);
   }
 
   ngOnInit(): void {
@@ -48,11 +48,13 @@ export class GameHomeComponent implements OnInit {
   // get battle list
   public async getBattleList() {
     this.battleList = [];
-    this.runningBattleList = [];
+    // this.runningBattleList = [];
     this.gameService.getBattleList().subscribe((response) => {
       if (response?.status == SUCCESS) {
-        this.battleList = response?.payload?.data?.gameList || [];
-        this.runningBattleList = response?.payload?.data?.runningGameList || [];
+        // this.battleList = response?.payload?.data?.gameList || [];
+
+        this.battleList = response?.payload?.data;
+        // this.runningBattleList = response?.payload?.data?.runningGameList || [];
       } else {
         this.notificationService.showError('Something went wrong.');
       }
@@ -189,6 +191,33 @@ export class GameHomeComponent implements OnInit {
         this.notificationService.showError('Something Went Wrong');
       });
     }
+  }
+
+  // Start The game
+  startGame(battleId : number) {
+    debugger
+    this.gameService.startGame(battleId).subscribe((response) => {
+      if (response?.status == SUCCESS) {
+        this.notificationService.showSuccess('Start The Game');
+      } else {
+        this.notificationService.showError('Something Went Wrong');
+      }
+    }, (error) => {
+      this.notificationService.showError('Something Went Wrong');
+    })
+  }
+
+  // Start The game
+  deleteGame(battleId: number) {
+    this.gameService.deleteGame(battleId).subscribe((response) => {
+      if (response?.status == SUCCESS) {
+        this.notificationService.showSuccess('Delete The Game');
+      } else {
+        this.notificationService.showError('Something Went Wrong');
+      }
+    }, (error) => {
+      this.notificationService.showError('Something Went Wrong');
+    })
   }
 
   errorMessageForRunningGame() {

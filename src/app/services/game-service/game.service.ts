@@ -7,9 +7,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { SUCCESS } from 'src/app/pages/constant/response-status.const';
 
 export enum APIEndPOint {
-  CREATE_BATTLE = "/game/get-game-code",
-  PLAY_GAME = "/game/pay-game",
-  GET_GAME_HISTORY = "/game/get-battle-list",
+  CREATE_BATTLE = "/game/create-game", // create game
+  GET_GAME_HISTORY = "/game/game-list", // game list
+  PLAY_GAME = "/game/play-game", // play game
+  START_GAME = "/game/start-game/BATTLEIID", // start game
+  DELETE_GAME = "/game/cancel-game/BATTLEIID", // delete and reject game
   GET_SINGLE_BATTLE = '/game/get-game-table/BATTLEIID',
   GET_USER_GAME_HISTORY = '/game/get-game-history',
   GET_CANCEL_RESULT = '/game/cancel-reason-list'
@@ -24,8 +26,8 @@ export class GameService {
   private battleList = new BehaviorSubject<any>([]);
   gameBattleList$ = this.battleList.asObservable();
 
-  private requestBattleList = new BehaviorSubject<any>([]);
-  requestBattleList$ = this.requestBattleList.asObservable();
+  // private requestBattleList = new BehaviorSubject<any>([]);
+  // requestBattleList$ = this.requestBattleList.asObservable();
 
   constructor(
     private httpClient: HttpClient,
@@ -35,13 +37,13 @@ export class GameService {
     this.baseUrl = environment.baseUrl;
   }
 
-  // create game table or battle
+  // create game
   createGameTable(payload: any): Observable<any> {
     return this.httpClient
       .post<any>(this.baseUrl + APIEndPOint.CREATE_BATTLE, payload);
   }
 
-  //  get game history or get battle details
+  // get game list
   getBattleList(): Observable<any> {
     return this.httpClient
       .get<any>(this.baseUrl + APIEndPOint.GET_GAME_HISTORY);
@@ -69,9 +71,22 @@ export class GameService {
       .post<any>(this.baseUrl + APIEndPOint.PLAY_GAME, payload);
   }
 
+  // start game
+  startGame(battleId: any): Observable<any> {
+    const battleAPI: string = APIEndPOint.START_GAME.replace('BATTLEIID', battleId);
+    return this.httpClient.get<any>(this.baseUrl + battleAPI);
+  }
+
+  // delete and reject game
+  deleteGame(battleId : any) : Observable<any> {
+    const battleAPI: string = APIEndPOint.DELETE_GAME.replace('BATTLEIID', battleId);
+    return this.httpClient
+      .delete<any>(this.baseUrl + battleAPI);
+  }
+
   setBattleList(list: any) {
-    this.battleList.next(list?.gameList);
-    this.requestBattleList.next(list?.runningGameList);
+    this.battleList.next(list);
+    // this.requestBattleList.next(list?.runningGameList);
   }
 
   //  get game history for particular player or user
