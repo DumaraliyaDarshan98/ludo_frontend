@@ -1,6 +1,6 @@
 
     <div class="container">
-        <div class="d-flex align-items-center justify-content-center flex-column" >
+        <div class="d-flex align-items-center justify-content-center flex-column" *ngIf="runningBattleList.length == 0">
             <p class="fs-16 bold opacity-8 mb-2">CREATE A BATTLE!</p>
             <div class="d-flex justify-content-center w-100 fs-14 input-group mb-3">
                 <input type="number" [formControl]="battleAmount" class="form-control fs-14" style="width: 200px;max-width: 200px;" placeholder="Amount" aria-label="Amount" aria-describedby="basic-addon2">
@@ -10,10 +10,12 @@
 
         <div class="row flex-column">
             <ng-container *ngFor="let battle of battleList; let index = index;">
-                <div *ngIf="battle?.status == 2 || battle?.status == 3" class="col-12 mb-2  card-list">
+                <div *ngIf="(battle?.status == 2 || battle?.status == 3) &&
+                (battle?.gamePlayer[0]?.p_id == loginUser?.id && (battle?.gamePlayer[0]?.p_status != 7 || battle?.gamePlayer[0]?.p_status != 6)
+                || battle?.gamePlayer[1]?.p_id == loginUser?.id  && (battle?.gamePlayer[1]?.p_status != 7 || battle?.gamePlayer[1]?.p_status != 6))" class="col-12 mb-2  card-list">
                     <div class="b-1 shadow-sm rounded px-0 ">
                         <p class="fs-14 border-bottom mb-0 p-2 px-3" style="display: flex;">
-                            <span class="semibold">CHALLENGE FROM</span> 
+                            <span class="semibold">CHALLENGE FROM</span>
                             <span class="fs-12 text-primary ms-2 opacity-8"> {{battle?.gamePlayer[0]?.p_name}} </span>
                             <!-- <ng-container *ngIf="battle?.game_owner_id == loginUser?.id && battle?.status == 1">
                                 <button class="btn btn-danger" style="margin-left: auto;">Delete</button>
@@ -23,7 +25,7 @@
                                 <button class="btn btn-danger mt-1" (click)="deleteGame(battle?.id)">Reject</button>
                             </ng-container>
                             <ng-container *ngIf="battle?.status == 3">
-                                <button class="btn btn-primary" style="margin-left: auto;">View</button>
+                                <button class="btn btn-primary" style="margin-left: auto;" (click)="redirectToCodePage(battle?.id)">View</button>
                                 <!-- <button class="btn btn-danger" style="margin-left: auto;">Reject</button> -->
                             </ng-container>
                         </p>
@@ -81,7 +83,7 @@
                     <div class="b-1 shadow-sm rounded px-0 ">
                         <div class="flex justify-content-between">
                             <p class="fs-14 border-bottom mb-0 p-2 px-3" style="display: flex;">
-                                <span class="semibold" >CHALLENGE FROM</span>  
+                                <span class="semibold" >CHALLENGE FROM</span>
                                 <span class="fs-12 text-primary ms-2 opacity-8"> {{battle?.gamePlayer[0]?.p_name}} </span>
                                 <ng-container *ngIf="battle?.game_owner_id == loginUser?.id && battle?.status == 1">
                                     <button class="btn btn-danger" style="margin-left: auto;" (click)="deleteGame(battle?.id)">Delete</button>
@@ -107,12 +109,14 @@
                                 </span>
                             </div>
 
-                            <button *ngIf="battle?.game_owner_id == loginUser?.id && battle?.status == 1" class="btn btn-info fs-14 px-3 mx-auto">Finding...</button>
+                            <ng-container *ngIf="runningBattleList.length == 0">
+                              <button *ngIf="battle?.game_owner_id == loginUser?.id && battle?.status == 1" class="btn btn-info fs-14 px-3 mx-auto">Finding...</button>
 
-                            <button *ngIf="battle?.game_owner_id !== loginUser?.id && battle?.status == 1" class="btn btn-warning fs-14 px-3 mx-auto" (click)="playGame(battle?.id)">PLAY</button>
-
-                            <!-- <button class="btn btn-warning fs-14 px-3 mx-auto" (click)="errorMessageForRunningGame()">PLAY</button> -->
-
+                              <button *ngIf="battle?.game_owner_id !== loginUser?.id && battle?.status == 1" class="btn btn-warning fs-14 px-3 mx-auto" (click)="playGame(battle?.id)">PLAY</button>
+                            </ng-container>
+                            <ng-container *ngIf="runningBattleList.length > 0">
+                              <button class="btn btn-warning fs-14 px-3 mx-auto" (click)="errorMessageForRunningGame()">PLAY</button>
+                            </ng-container>
                             <div>
                                 <span class="d-flex flex-column">
                                     <span class="text-uppercase fs-10 opacity-8"> Prize</span>
@@ -130,7 +134,7 @@
         </div>
 
         <!-- <div class="hr my-4 p-1 bg-gray"></div> -->
-        
+
         <!-- Running battle -->
         <div class="w-100">
             <div class="row">

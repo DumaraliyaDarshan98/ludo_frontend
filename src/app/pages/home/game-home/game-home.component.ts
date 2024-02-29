@@ -18,7 +18,7 @@ export class GameHomeComponent implements OnInit {
   loginUser: any;
   walletAmount: any = 0;
   battleList: any[] = [];
-  // runningBattleList : any[] = [];
+  runningBattleList : any[] = [];
 
   battleAmount: FormControl = new FormControl();
 
@@ -32,7 +32,16 @@ export class GameHomeComponent implements OnInit {
   ) {
     this.loginUser = this.localStorageService.getLogger();
     this.walletService.userTotalAmount$.subscribe((amount) => this.walletAmount = amount);
-    this.gameService.gameBattleList$.subscribe((list) => this.battleList = list);
+    this.gameService.gameBattleList$.subscribe((list) => {
+      this.battleList = list;
+      this.runningBattleList = [];
+      this.battleList?.map((element: any) => {
+        if(element.status == 3 && ((element?.gamePlayer[0]?.p_id == this.loginUser?.id && element?.gamePlayer[0]?.p_status == 3) || (element?.gamePlayer[1]?.p_id == this.loginUser?.id && element?.gamePlayer[1]?.p_status == 3))) {
+          this.runningBattleList.push(element)
+        }
+      });
+
+    });
     // this.gameService.requestBattleList$.subscribe((list) => this.runningBattleList = list);
   }
 
@@ -48,12 +57,18 @@ export class GameHomeComponent implements OnInit {
   // get battle list
   public async getBattleList() {
     this.battleList = [];
-    // this.runningBattleList = [];
+    this.runningBattleList = [];
     this.gameService.getBattleList().subscribe((response) => {
       if (response?.status == SUCCESS) {
         // this.battleList = response?.payload?.data?.gameList || [];
 
         this.battleList = response?.payload?.data;
+
+        this.battleList?.map((element: any) => {
+          if(element.status == 3 && ((element?.gamePlayer[0]?.p_id == this.loginUser?.id && element?.gamePlayer[0]?.p_status == 3) || (element?.gamePlayer[1]?.p_id == this.loginUser?.id && element?.gamePlayer[1]?.p_status == 3))) {
+            this.runningBattleList.push(element)
+          }
+        });
         // this.runningBattleList = response?.payload?.data?.runningGameList || [];
       } else {
         this.notificationService.showError('Something went wrong.');
