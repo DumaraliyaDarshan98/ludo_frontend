@@ -1,35 +1,49 @@
-
-
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="d-flex align-items-center alert alert-danger py-2 mb-2" role="alert">
                 KYC Pending !
                 <button type="button" class="btn btn-danger ms-auto" (click)="kycModal()">Complete Here</button>
-                </div>
+            </div>
         </div>
         <div class="col-12">
             <h2 class="fs-22 text-center bold my-3">Our Games</h2>
         </div>
     </div>
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-lg-2 mb-md-2 mb-xl-2 mb-sm-4 mb-4">
-        <a class="h-100 w-100 cursor-pointer d-flex align-items-center justify-content-center flex-column" (click)="playGame()">
-            <p class="d-flex align-items-center fs-12 blink">
-                <svg height="18px" width="18px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>radiobox-marked</title><path d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z" /></svg>
-                Ludo Classic Only (LIVE) </p>
-            <div class="game-outer rounded shadow">
-                <img class="h-100 w-100 rounded" src="https://d37om4gxfn0aox.cloudfront.net/static-content/front/images/ludo-lite-mod-1.jpeg" alt="play game">
-            </div>
-        </a>
+            <a class="h-100 w-100 cursor-pointer d-flex align-items-center justify-content-center flex-column"
+                (click)="playGame()">
+                <p class="d-flex align-items-center fs-12 blink">
+                    <svg height="18px" width="18px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <title>radiobox-marked</title>
+                        <path
+                            d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z" />
+                    </svg>
+                    Ludo Classic Only (LIVE)
+                </p>
+                <div class="game-outer rounded shadow">
+                    <img class="h-100 w-100 rounded"
+                        src="https://d37om4gxfn0aox.cloudfront.net/static-content/front/images/ludo-lite-mod-1.jpeg"
+                        alt="play game">
+                </div>
+            </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-lg-2 mb-md-2 mb-xl-2 mb-sm-4 mb-4">
-            <a class="h-100 w-100 cursor-pointer d-flex align-items-center justify-content-center flex-column"  (click)="playGame()">
+            <a class="h-100 w-100 cursor-pointer d-flex align-items-center justify-content-center flex-column"
+                (click)="playGame()">
                 <p class="d-flex align-items-center fs-12 blink">
-                    <svg height="18px" width="18px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>radiobox-marked</title><path d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z" /></svg>
-                    Ludo Classic Only (LIVE) </p>
+                    <svg height="18px" width="18px" class="me-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <title>radiobox-marked</title>
+                        <path
+                            d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z" />
+                    </svg>
+                    Ludo Classic Only (LIVE)
+                </p>
                 <div class="game-outer rounded shadow">
-                    <img class="h-100 w-100 rounded" src="https://d37om4gxfn0aox.cloudfront.net/static-content/front/images/ludo-rich-mode-1.jpeg" alt="play game">
+                    <img class="h-100 w-100 rounded"
+                        src="https://d37om4gxfn0aox.cloudfront.net/static-content/front/images/ludo-rich-mode-1.jpeg"
+                        alt="play game">
                 </div>
             </a>
         </div>
@@ -37,106 +51,104 @@
 
 </div>
 <footer class="pt-5 opacity-8">
-<div class="container">
-    <a class="d-block" style="height: 2rem; width: 3.5rem;" href="#">
-        <img class="h-100 w-100" style="object-fit: contain;" src="./../../../assets/img/logo-new.png" alt="logo">
-    </a>
-    <div class="row fs-14">
-    <div class="col-4">
-        <ul class="ps-0">
-            <li class="list-none py-1" [routerLink]="['/home/about-us']">
-                <a>About us</a>
-            </li>
-            <li class="list-none py-1" [routerLink]="['/home/privacy-policy']">
-                <a>Privacy Policy</a>
-            </li>
-            <li class="list-none py-1" [routerLink]="['/home/terms-and-condition']">
-                <a>Terms & Condition</a>
-            </li>
-        </ul>
+    <div class="container">
+        <a class="d-block" style="height: 2rem; width: 3.5rem;" href="#">
+            <img class="h-100 w-100" style="object-fit: contain;" src="./../../../assets/img/ludologo.jpg" alt="logo">
+        </a>
+        <div class="row fs-14">
+            <div class="col-4">
+                <ul class="ps-0">
+                    <li class="list-none py-1 cursor" [routerLink]="['/home/about-us']">
+                        <a>About us</a>
+                    </li>
+                    <li class="list-none py-1 cursor" [routerLink]="['/home/privacy-policy']">
+                        <a>Privacy Policy</a>
+                    </li>
+                </ul>
 
-    </div>
-    <div class="col-4">
-        <ul class="ps-0">
-            <li class="list-none py-1" [routerLink]="['/home/refund-policy']">
-                <a>Refund/ Cancellation Policy</a>
-            </li>
-            <li class="list-none py-1" [routerLink]="['/home/contact-us']">
-                <a>Contact Us</a>
-            </li>
+            </div>
+            <div class="col-4">
+                <ul class="ps-0">
+                    <!-- <li class="list-none py-1" [routerLink]="['/home/refund-policy']">
+                        <a>Refund/ Cancellation Policy</a>
+                    </li> -->
+                    <li class="list-none py-1 cursor" [routerLink]="['/home/contact-us']">
+                        <a>Contact Us</a>
+                    </li>
+                    <li class="list-none py-1 cursor" [routerLink]="['/home/terms-and-condition']">
+                        <a>Terms & Condition</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <div class="col-4">
+                <ul class="ps-0">
+                    <li class="list-none py-1" [routerLink]="['/home/responsible-gaming']">
+                        <a>Responsible Gaming</a>
+                    </li>
+                    <li class="list-none py-1" [routerLink]="['/home/platform-commission']">
+                        <a>Platform Commission</a>
+                    </li>
 
-        </ul>
-    </div>
-    <div class="col-4">
-        <ul class="ps-0">
-            <li class="list-none py-1" [routerLink]="['/home/responsible-gaming']">
-                <a>Responsible Gaming</a>
-            </li>
-            <li class="list-none py-1" [routerLink]="['/home/platform-commission']">
-                <a>Platform Commission</a>
-            </li>
-
-        </ul>
-    </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <p class="fs-14 semibold">About Us</p>
-            <p class="fs-12 opacity-8">ApnaLudo is a real-money gaming product owned ("ApnaLudo" or "We" or "Us" or "Our").</p>
-        </div>
-        <div class="col-12">
-            <p class="fs-14 semibold">Our Business & Products</p>
-            <p class="fs-12 opacity-8">We are an HTML5 game-publishing company and our mission is to make accessing games fast and easy by removing the friction of app-installs.
-            </p>
-            <p class="fs-12 opacity-8">ApnaLudo is a skill-based real-money gaming platform accessible only for our users in
-                India. It is accessible on <a target="_blank" rel="noopener noreferrer" href="">https://www.apnaludo.com</a>. On ApnaLudo, users can compete for real cash in
-                Tournaments and Battles. They can encash their winnings via popular options such as Paytm Wallet, Amazon Pay,
-                Bank Transfer, Mobile Recharges etc.</p>
-        </div>
-        <div class="col-12">
-            <p class="fs-14 semibold">Our Games</p>
-            <p class="fs-12 opacity-8">ApnaLudo has a wide-variety of high-quality, premium HTML5 games. Our games are especially
-                compressed and optimised to work on low-end devices, uncommon browsers, and patchy internet speeds.
-            </p>
-            <p class="fs-12 opacity-8">We have games across several popular categories: Arcade, Action, Adventure, Sports &amp;
-                Racing, Strategy, Puzzle &amp; Logic. We also have a strong portfolio of multiplayer games such as Ludo, Chess,
-                8 Ball Pool, Carrom, Tic Tac Toe, Archery, Quiz, Chinese Checkers and more! Some of our popular titles are:
-                Escape Run, Bubble Wipeout, Tower Twist, Cricket Gunda, Ludo With Friends. If you have any suggestions around
-                new games that we should add or if you are a game developer yourself and want to work with us, don't hesitate
-                to drop in a line at </p>
+                </ul>
+            </div> -->
         </div>
     </div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p class="fs-14 semibold">About Us</p>
+                <p class="fs-12 opacity-8">ApnaLudo is a real-money gaming product owned ("ApnaLudo" or "We" or "Us" or
+                    "Our").</p>
+            </div>
+            <div class="col-12">
+                <p class="fs-14 semibold">Our Business & Products</p>
+                <p class="fs-12 opacity-8">We are an HTML5 game-publishing company and our mission is to make accessing
+                    games fast and easy by removing the friction of app-installs.
+                </p>
+                <p class="fs-12 opacity-8">ApnaLudo is a skill-based real-money gaming platform accessible only for our
+                    users in
+                    India. It is accessible on <a target="_blank" rel="noopener noreferrer"
+                        href="">https://www.apnaludo.com</a>. On ApnaLudo, users can compete for real cash in
+                    Tournaments and Battles. They can encash their winnings via popular options such as Paytm Wallet,
+                    Amazon Pay,
+                    Bank Transfer, Mobile Recharges etc.</p>
+            </div>
+            <div class="col-12">
+                <p class="fs-14 semibold">Our Games</p>
+                <p class="fs-12 opacity-8">ApnaLudo has a wide-variety of high-quality, premium HTML5 games. Our games
+                    are especially
+                    compressed and optimised to work on low-end devices, uncommon browsers, and patchy internet speeds.
+                </p>
+                <p class="fs-12 opacity-8">We have games across several popular categories: Arcade, Action, Adventure,
+                    Sports &amp;
+                    Racing, Strategy, Puzzle &amp; Logic. We also have a strong portfolio of multiplayer games such as
+                    Ludo, Chess,
+                    8 Ball Pool, Carrom, Tic Tac Toe, Archery, Quiz, Chinese Checkers and more! Some of our popular
+                    titles are:
+                    Escape Run, Bubble Wipeout, Tower Twist, Cricket Gunda, Ludo With Friends. If you have any
+                    suggestions around
+                    new games that we should add or if you are a game developer yourself and want to work with us, don't
+                    hesitate
+                    to drop in a line at </p>
+            </div>
+        </div>
+    </div>
 </footer>
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">...</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-

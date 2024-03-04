@@ -217,7 +217,7 @@
   <header style="position: sticky; top: 0; z-index: 500">
     <div class="d-flex">
       <div class="header-right flex-grow-1 d-flex align-items-center">
-        <nav class="w-100 navbar navbar-expand-lg bg-white shadow">
+        <nav class="w-100 navbar navbar-expand-lg bg-white shadow" style="height: 68px;">
           <div class="d-flex align-items-center container-fluid">
             <div class="d-flex align-items-center">
               <button *ngIf="loginUser" (click)="hideShowMenu()" matTooltip="Expand" type="checkbox"
@@ -227,9 +227,10 @@
                   <path d="M3,15H21V13H3V15M3,19H21V17H3V19M3,11H21V9H3V11M3,5V7H21V5H3Z" />
                 </svg>
               </button>
-              <a class="navbar-brand pt-0" style="height: 2rem; width: 3.5rem" [routerLink]="['/home/game-home']">
-                <img class="h-100 w-100" style="object-fit: contain" src="./../../../assets/img/logo-new.png"
+              <a class="navbar-brand pt-0" style="height: 2rem; width: 3.5rem" [routerLink]="['/home']">
+                <img class="h-100 w-100" style="border-radius: 20% !important; height: 40px !important;" src="./../../../assets/img/ludologo.jpg"
                   alt="logo" />
+                  <!-- style="object-fit: contain -->
               </a>
             </div>
             <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -239,7 +240,7 @@
             <div class="d-flex justify-content-end collapse navbar-collaps" id="navbarSupportedContent">
               <button *ngIf="loginUser" type="button" class="btn d-flex justify-content-end border p-0 me-2">
                 <div class="h-100 d-flex align-items-center rounded bg-gray">
-                  <div class="d-flex align-items-center rounded-start py-1 px-2" style="background-color: #f7f7f7">
+                  <div class="d-flex align-items-center rounded-start py-1 px-2" style="background-color: #f7f7f7" routerLink="/home/wallet">
                     <img class="me-1" src="../../../../assets/img/money.png" height="24px" width="24px" alt="money">
                     <span class="px-1">
                       <p class="fs-10 lh-1 mb-0">CASH</p>
@@ -247,7 +248,7 @@
                     </span>
                   </div>
                   <!-- <div class="vr"></div> -->
-                  <span class="px-2" [routerLink]="['/home/wallet']">+</span>
+                  <span class="px-2">+</span>
                 </div>
               </button>
               <button *ngIf="!loginUser" class="btn btn-secondary fs-14 me-2" type="button"
