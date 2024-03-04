@@ -5,14 +5,15 @@
               <table class="table border  fs-14">
               <thead>
                   <tr>
-                      <th scope="col" class="fs-16 py-3 bg-g-primary text-center"  colspan="7">Game History</th>
+                      <th scope="col" class="fs-16 py-3 bg-g-primary text-center"  colspan="8">Game History</th>
                   </tr>
                 <tr class="bg-fb">
                   <th  class="bg-fb bg-g-secondary" scope="col">SR No.</th>
                   <th  class="bg-fb" scope="col">Amount</th>
                   <th  class="bg-fb" scope="col">Player 1</th>
                   <th  class="bg-fb" scope="col">Player 2</th>
-                  <th  class="bg-fb" scope="col">Winner</th>
+                  <th  class="bg-fb" scope="col">Status</th>
+                  <th  class="bg-fb" scope="col">Game Status</th>
                   <th  class="bg-fb" scope="col">Winner <br> Amount</th>
                   <th class="bg-fb" scope="col">Date</th>
                 </tr>
@@ -20,11 +21,26 @@
               <tbody>
                 <tr *ngFor="let item of gameHistory; let index = index">
                   <td> {{ index + 1 }}</td>
-                  <td class="text-danger"> Rs. {{ item?.amount  || '0' }} </td>
-                  <td> {{ item?.playerOne?.ludo_name }}</td>
+                  <td class="text-danger"> Rs. {{ item?.gameTable?.amount  || '0' }} </td>
+
+                  <td> {{ item?.playerOne?.ludo_name || item?.playerOne?.full_name }}</td>
                   <td> {{ item?.playerTwo?.ludo_name }}</td>
-                  <td> {{ item?.game_owner_id }}</td>
-                  <td class="text-danger"> Rs. {{ item?.winner_amount }}</td>
+
+                  <td>
+                    <span *ngIf="item?.p_status == '3'" style="color: rgb(62, 82, 23);">Running</span>
+                    <span *ngIf="item?.p_status == '4'" style="color: green;">Completed</span>
+                    <span *ngIf="item?.p_status == '5'" style="color: red;">Cancel</span>
+                    <span *ngIf="item?.p_status == '6'" style="color: green;">Winner</span>
+                    <span *ngIf="item?.p_status == '7'" style="color: red;">Looser</span>
+                  </td>
+
+                  <td>
+                    <span *ngIf="item?.gameTable?.status == 3" style="color: yellowgreen;">Running</span>
+                    <span *ngIf="item?.gameTable?.status == 4" style="color: green;">Completed</span>
+                    <span *ngIf="item?.gameTable?.status == 5" style="color: red;">Cancel</span>
+                  </td>
+
+                  <td class="text-danger"> Rs. {{ item?.gameTable?.winner_amount }}</td>
                   <!-- <td>
                     <span *ngIf="item?.status == 1" class="mb-1 me-2 font-medium bg-light-success text-success">Verify</span>
                     <span *ngIf="item?.status == 2" class="mb-1 me-2 font-medium bg-light-danger text-danger">Decline</span>

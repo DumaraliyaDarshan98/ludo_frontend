@@ -35,12 +35,14 @@ export class GameHomeComponent implements OnInit {
     this.gameService.gameBattleList$.subscribe((list) => {
       this.battleList = list;
       this.runningBattleList = [];
+      console.log('sdfsdfsdfsdfsdfsdfsdf', this.battleList)
       this.battleList?.map((element: any) => {
         if(element.status == 3 && ((element?.gamePlayer[0]?.p_id == this.loginUser?.id && element?.gamePlayer[0]?.p_status == 3) || (element?.gamePlayer[1]?.p_id == this.loginUser?.id && element?.gamePlayer[1]?.p_status == 3))) {
           this.runningBattleList.push(element)
         }
       });
-
+      this.walletService.getWalletAmount();
+      console.log('runningBattleList', this.runningBattleList)
     });
     // this.gameService.requestBattleList$.subscribe((list) => this.runningBattleList = list);
   }
@@ -69,6 +71,7 @@ export class GameHomeComponent implements OnInit {
             this.runningBattleList.push(element)
           }
         });
+
         // this.runningBattleList = response?.payload?.data?.runningGameList || [];
       } else {
         this.notificationService.showError('Something went wrong.');
@@ -210,7 +213,6 @@ export class GameHomeComponent implements OnInit {
 
   // Start The game
   startGame(battleId : number) {
-    debugger
     this.gameService.startGame(battleId).subscribe((response) => {
       if (response?.status == SUCCESS) {
         this.notificationService.showSuccess('Start The Game');

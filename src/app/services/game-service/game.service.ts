@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SUCCESS } from 'src/app/pages/constant/response-status.const';
+import { WalletWithdrawServiceService } from '../wallet-withdraw-service/wallet-withdraw-service.service';
 
 export enum APIEndPOint {
   CREATE_BATTLE = "/game/create-game", // create game
@@ -32,7 +33,8 @@ export class GameService {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private walletService : WalletWithdrawServiceService
   ) {
     this.baseUrl = environment.baseUrl;
   }
@@ -86,6 +88,7 @@ export class GameService {
 
   setBattleList(list: any) {
     this.battleList.next(list);
+    // this.walletService.getWalletAmount();
     // this.requestBattleList.next(list?.runningGameList);
   }
 
