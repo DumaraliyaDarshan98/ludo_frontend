@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IWonComponent } from './i-won/i-won.component';
 import { CancelComponent } from './cancel/cancel.component';
 import { ILooseComponent } from './i-loose/i-loose.component';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-show-game-code',
@@ -22,7 +23,8 @@ export class ShowGameCodeComponent implements OnInit {
     private gameService: GameService,
     private notificationService: NotificationService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private clipboard: Clipboard
   ) {
     this.route.params.subscribe((params: any) => {
       console.log(typeof params['gameTableId'])
@@ -83,5 +85,15 @@ export class ShowGameCodeComponent implements OnInit {
     modalRef.result.then((result) => {
       console.log('result : resultresult : ', result)
     })
+  }
+
+  copyToClipboard() {
+    this.clipboard.copy(this.battleDetails?.game_code);
+    this.notificationService.showSuccess('Copied');
+  }
+
+  shareOnWhatsApp() {
+    const url = 'https://web.whatsapp.com/';
+    window.open(url, '_blank');
   }
 }

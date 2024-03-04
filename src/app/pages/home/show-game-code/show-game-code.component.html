@@ -1,45 +1,125 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-12 text-center mb-5">
-            <div class="image-outer mb-4">
-                <img class="h-100 w-100" style="object-fit: contain;"
-                    src="https://d37om4gxfn0aox.cloudfront.net/static-content/front/images/refer-earn.jpg" alt="">
-            </div>
-            <!-- <p class="fs-22 semibold mb-0">Earn now unlimited 🥳</p>
-              <p class="fs-16 mb-4">Refer your friends now!</p> -->
-            <p class="fs-18 d-flex align-items-center justify-content-center bold mb-0">Your Game Code:
-                <span class="fs-16 bold mb-1 mx-2"> {{ battleDetails?.game_code }}</span>
-                <button
-                    class="btn btn-primary edit_icon d-flex align-items-center justify-content-center p-0 rounded-circle"><svg
-                        xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 24 24">
-                        <title>circle-edit-outline</title>
-                        <path
-                            d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12H20A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4V2M18.78,3C18.61,3 18.43,3.07 18.3,3.2L17.08,4.41L19.58,6.91L20.8,5.7C21.06,5.44 21.06,5 20.8,4.75L19.25,3.2C19.12,3.07 18.95,3 18.78,3M16.37,5.12L9,12.5V15H11.5L18.87,7.62L16.37,5.12Z"
-                            fill="#fff" />
-                    </svg></button>
-            </p>
-            <!-- <p class="fs-16 mb-0">Total Refers: <span class="bold">0</span></p> -->
-            <!-- <p class="fs-16 mb-0">Total Earnings: <span class="bold">0</span></p> -->
-        </div>
+      <div class="row flex-column mb-4">
+          <div class="col-12 mb-2  card-list">
+              <div class="b-1 shadow-sm rounded px-0 ">
+                  <div class="d-flex align-items-center border-bottom ">
+                      <p class="fs-12 mb-0 p-2 px-3"><span class="semibold me-2">Playing for</span>  <img class="me-1" src="../../../../assets/img/money.png" height="20px" width="20px" alt="money">
+                          {{battleDetails?.amount}}</p>
+                      <p class="fs-12 ms-auto mb-0 p-2 px-3"><span class="semibold me-2">Prize</span>  <img class="me-1" src="../../../../assets/img/money.png" height="20px" width="20px" alt="money">
+                        {{battleDetails?.winner_amount}}</p>
+                  </div>
+                 <div class="w-100 d-flex align-items-center">
+                      <div class="w-100 row">
+                          <div  class="col-2 mx-auto d-flex align-items-center flex-column p-2 px-3">
+                              <div class="small-user">
+                                  <img src="../../../../assets/img/author.svg" alt="user-img">
+                              </div>
+                              <p class="fs-10 mb-0">{{battleDetails?.gamePlayer[0]?.p_name}}</p>
+                          </div>
+                          <div class="col-8 d-flex align-items-center  semibold justify-content-center ">
+                              V/S
+                          </div>
+                          <div  class="col-2 mx-auto d-flex align-items-center flex-column p-2 px-3">
+                              <div class="small-user">
+                                  <img src="../../../../assets/img/author.svg" alt="user-img">
+                              </div>
+                              <p class="fs-10 mb-0">{{battleDetails?.gamePlayer[1]?.p_name}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 
-        <div class="col-12 text-center mb-5">
-            <button class=" btn btn-primary fs-18 py-3 text-uppercase semibold  me-2" (click)="openWinModal()"> I Won</button>
-            <button class=" btn btn-primary fs-18 py-3 text-uppercase semibold  me-2" (click)="openLooseModal()"> I Loose</button>
-            <button class=" btn btn-primary fs-18 py-3 text-uppercase semibold  me-2" (click)="openCancelModal()"> Cancel</button>
-        </div>
-
-        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
-            <div class="d-flex align-items-center">
-                <button class="w-100 btn btn-primary fs-18 py-3 text-uppercase semibold  me-2"> Share in
-                    Whatsapp</button>
-                <button class="w-auto btn btn-secondary fs-18 py-3 text-uppercase semibold  me-2"> <svg height="24px"
-                        width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <title>content-copy</title>
-                        <path
-                            d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
-                            fill="#254399" />
-                    </svg></button>
+      <!-- room code details -->
+      <div class="row flex-column mb-3">
+        <div class="col-12 mb-2  card-list">
+            <div class="b-1 shadow-sm rounded px-0" style="background-color: rgb(185, 183, 183);">
+                <div class="col-12 text-center mb-3 mt-3">
+                    <h3>Room Code</h3>
+                </div>
+                <div class="col-12 text-center mb-3" style="color: red;">
+                    <h3>{{ battleDetails?.game_code }}</h3>
+                </div>
+                <div class="col-12 mb-2" style="justify-content: center !important;">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button class="w-80 btn btn-primary fs-18 py-3 text-uppercase semibold  me-2" style="height: 47px;
+                        margin: 0px;
+                        padding-top: 8px !important;" (click)="shareOnWhatsApp()"> Share in
+                            Whatsapp</button>
+                        <button class="w-auto btn btn-secondary fs-18 py-3 text-uppercase semibold  me-2" style=" height: 47px;
+                        margin: 0px;
+                        padding-top: 8px !important;" (click)="copyToClipboard()"> <svg height="24px"
+                                width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <title>content-copy</title>
+                                <path
+                                    d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
+                                    fill="#254399" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12 text-center mb-3">
+                    <p style="font-size: 18px; font-weight: bold;">Play ludo game in Ludo King App</p>
+                </div>
             </div>
         </div>
+      </div>
+
+      <div class="col-12 text-center mb-3">
+        <button class="btn btn-primary fs-18 py-3 text-uppercase semibold mt-1 me-2" (click)="openWinModal()"> I Won</button>
+        <button class="btn btn-primary fs-18 py-3 text-uppercase mt-1 semibold  me-2" (click)="openLooseModal()"> I Loose</button>
+        <button class="btn btn-primary fs-18 py-3 text-uppercase mt-1 semibold  me-2" (click)="openCancelModal()"> Cancel</button>
+      </div>
+
+      <!-- game rules page -->
+      <div class="row flex-column">
+        <div class="col-12 mb-2  card-list">
+            <div class="b-1 shadow-sm rounded">
+                <div class="col-12 text-start p-1">
+                    <h4>Game Rules</h4>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1">
+                    <p>Room codes will accepted in classic mode only.</p>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1">
+                    <p>Record every game while playing.</p>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1">
+                    <p>For cancellation of game, video proof is necessary.</p>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1" style="color: red;">
+                    <p>Popular Room code के गेम play नही करने ह यदि कोई popular room code का game play के loss ho jata h तो वो उसकी अपनी गलती होगी उस game me हम कोई मदद नहीं कर सकते है।</p>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1" style="color: red;">
+                    <p>Important:- popular Room code देने वाले usar की id 00 कर दी जाएगी।</p>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1" style="color: red;">
+                    <p>कोई भी गेम में रिजल्ट सावधानी से डाले गलत रिजल्ट डालने पर गेम किलिर हो जायेगा तो उसकी जिमेदारी हमारी नही होगी।</p>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1">
+                    <p>50 Penality will be charged for updating wrong result.</p>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1">
+                    <p> 25 Penality will be charged for not updating result.</p>
+                </div>
+                <hr class="m-1">
+                <div class="col-12 text-start p-1" style="color: red;">
+                    <p>कृपया कैंसिल करने से पहले रूम से गेम लेफ्ट जरूर हो जाये अन्थया ऑटो प्ले होकर, आप गेम लोस्स हो सकते है। उसमे एडमिन की कोई जिम्मेदारी नही होगी।</p>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
     </div>
 </div>

@@ -14,6 +14,7 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { APIInterceptor } from './Interceptor/ApiInterceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    ClipboardModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       // positionClass: 'toast-top-right',
