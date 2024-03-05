@@ -11,7 +11,8 @@ export enum APIEndPOint {
   ADD_WALLET = "/user/add-wallet",
   WITHDRAW_REQUEST = "/user/withdraw-request",
   GET_WALLET_AMOUNT = "/user/wallet-amount",
-  NOTIFICATION_LIST = "/notification/list"
+  NOTIFICATION_LIST = "/notification/list",
+  REFER_CODE_AND_COMMISSION = "/admin/refer-get-commission"
 }
 
 @Injectable({
@@ -68,5 +69,11 @@ export class WalletWithdrawServiceService {
   notificationList() {
     return this.httpClient
       .get<any>(this.baseUrl + APIEndPOint.NOTIFICATION_LIST);
+  }
+
+  // get refer commission
+  getReferCommission(): Observable<any> {
+    return this.httpClient
+      .get<any>(this.baseUrl + APIEndPOint.REFER_CODE_AND_COMMISSION);
   }
 }
