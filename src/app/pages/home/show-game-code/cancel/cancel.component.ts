@@ -1,3 +1,4 @@
+import { WalletWithdrawServiceService } from 'src/app/services/wallet-withdraw-service/wallet-withdraw-service.service';
 import { GameService } from 'src/app/services/game-service/game.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +22,7 @@ export class CancelComponent implements OnInit {
     private gameService : GameService,
     private showGameCodeService : ShowGameCodeService,
     private notificationService : NotificationService,
+    private walletService : WalletWithdrawServiceService,
   ) { }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class CancelComponent implements OnInit {
     this.showGameCodeService.cancel(payload).subscribe((response) => {
       if(response?.status == SUCCESS) {
         this.notificationService.showSuccess('You Cancel the game');
+        this.walletService.getWalletAmount();
         this.closePopUp();
       } else {
         this.notificationService.showError('Please After After Some Time');

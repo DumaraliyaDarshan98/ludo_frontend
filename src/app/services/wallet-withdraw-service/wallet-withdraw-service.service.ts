@@ -10,7 +10,8 @@ export enum APIEndPOint {
   WITHDRAW_HISTORY = "/user/withdraw-history",
   ADD_WALLET = "/user/add-wallet",
   WITHDRAW_REQUEST = "/user/withdraw-request",
-  GET_WALLET_AMOUNT = "/user/wallet-amount"
+  GET_WALLET_AMOUNT = "/user/wallet-amount",
+  NOTIFICATION_LIST = "/notification/list"
 }
 
 @Injectable({
@@ -61,5 +62,11 @@ export class WalletWithdrawServiceService {
   // set notification count
   setUserAmount(amount: number) {
     this.userAmount.next(amount);
+  }
+
+  // Get notification list
+  notificationList() {
+    return this.httpClient
+      .get<any>(this.baseUrl + APIEndPOint.NOTIFICATION_LIST);
   }
 }
