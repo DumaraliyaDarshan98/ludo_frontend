@@ -16,12 +16,13 @@ export class LoginComponent extends BaseLogin implements OnInit {
 
   defaultLoginForm = {
     userName: new FormControl("", [Validators.required]),
-    password: new FormControl("", [Validators.required]),
+    otp: new FormControl(""),
   };
 
   loginForm = new FormGroup(this.defaultLoginForm, []);
   loginUser: any;
   showLoader: boolean = false;
+  isOTP : boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -46,10 +47,12 @@ export class LoginComponent extends BaseLogin implements OnInit {
       this.showLoader = true;
       this.authService.login(this.loginForm.value).subscribe((response) => {
         if (response?.status == SUCCESS) {
-          this.localStorageService.setLogger(response?.payload);
-          this.showLoader = false;
-          this.router.navigateByUrl('/home');
-          this.notificationService.showSuccess(response?.message || 'User login successfully');
+          console.log('response', response?.payload.status);
+          this.isOTP = true;
+          // this.localStorageService.setLogger(response?.payload);
+          // this.showLoader = false;
+          // this.router.navigateByUrl('/home');
+          this.notificationService.showSuccess(response?.message || 'OTP Send Successfully');
         } else {
           this.showLoader = false;
           this.notificationService.showError(response?.message);
@@ -61,5 +64,33 @@ export class LoginComponent extends BaseLogin implements OnInit {
     }
   }
 
+  NumberOnly(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+  }
+
+  verifyOTP() {
+    this.loginForm.markAllAsTouched();
+    this.showLoader = true;
+    this.authService.verifyOTP(this.loginForm.value).subscribe((response) => {
+      if (response?.status == SUCCESS) {
+        console.log('response', response?.payload.status);
+        this.isOTP = false;
+        this.localStorageService.setLogger(response?.payload);
+        this.showLoader = false;
+        this.router.navigateByUrl('/home');
+        this.notificationService.showSuccess(response?.message || 'OTP Verify Successfully');
+      } else {
+        this.showLoader = false;
+        this.notificationService.showError(response?.message);
+      }
+    }, (error) => {
+      this.showLoader = false;
+      this.notificationService.showError(error?.error?.error?.message || 'Something went wrong!');
+    });
+  }
 
 }

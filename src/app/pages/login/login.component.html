@@ -10,49 +10,51 @@
 
                         <div class="d-flex flex-column  input-group mb-3">
                             <!-- <span class="input-group-text" style="background-color: #e9ecef;">+91</span> -->
-                            <input type="text" class="w-100 rounded form-control fs-14" placeholder="Email or Mobile No."
+                            <input type="text" class="w-100 rounded form-control fs-14" placeholder="Mobile No."
                                 formControlName="userName" aria-label="Mobile Number" aria-describedby="basic-addon1"
-                                required>
+                                (keypress)="NumberOnly($event)" [maxlength]="10" [minlength]="10" required>
                             <div>
-                            <span class="text-danger" *ngIf="
+                                <span class="text-danger" *ngIf="
                                 loginForm.controls.userName?.touched &&
                                 loginForm.controls.userName?.errors?.['required']">
-                                Please enter userName
-                            </span>
-                            <span class="text-danger" *ngIf="
+                                    Please enter userName
+                                </span>
+                                <span class="text-danger" *ngIf="
                                 loginForm.controls.userName?.touched &&
                                 loginForm.controls.userName?.errors?.['pattern']">
-                                Please enter valid userName
-                            </span>
+                                    Please enter valid userName
+                                </span>
+                            </div>
                         </div>
-                        </div>
-                        <div class="d-flex flex-column input-group mb-3">
-                            <span class="showicon" *ngIf="!showPassword" (click)="showHidePass()"><i
+                        <div class="d-flex flex-column input-group mb-3" *ngIf="isOTP">
+                            <!-- <span class="showicon" *ngIf="!showPassword" (click)="showHidePass()"><i
                                     class="bi bi-eye-fill"></i></span>
                             <span class="showicon" *ngIf="showPassword" (click)="showHidePass()"><i
-                                    class="bi bi-eye-slash-fill"></i></span>
-                            <input type="password" class="w-100 rounded form-control fs-14" placeholder="Password"
-                                formControlName="password" aria-label="Password" aria-describedby="basic-addon1"
-                                required="">
-                            <span class="text-danger" *ngIf="
-                                loginForm.controls.password?.touched &&
-                                loginForm.controls.password?.errors?.['required']
+                                    class="bi bi-eye-slash-fill"></i></span> -->
+                            <input type="number" class="w-100 rounded form-control fs-14" placeholder="OPT"
+                                formControlName="otp" aria-label="OTP" aria-describedby="basic-addon1" required=""
+                                (keypress)="NumberOnly($event)">
+                            <!-- <span class="text-danger" *ngIf="
+                                loginForm.controls.otp?.touched &&
+                                loginForm.controls.otp?.errors?.['required']
                             ">
                                 Please enter valid password
-                            </span>
-                            <div>
+                            </span> -->
+                            <!-- <div>
                                 <span class="text-danger" *ngIf="
                                     loginForm.controls.password?.touched &&
                                     loginForm.controls.password?.errors?.['pattern']
                                 ">
                                     Please enter valid password
                                 </span>
-                            </div>
+                            </div> -->
                         </div>
-                        <p class="txt-white pb-4" style="float: right;"><a [routerLink]="['/verify-email']"> Forgot Password
-                                ?</a></p>
-                        <button type="button" (click)="login()"
+                        <!-- <p class="txt-white pb-4" style="float: right;"><a [routerLink]="['/verify-email']"> Forgot Password
+                                ?</a></p> -->
+                        <button *ngIf="!isOTP" type="button" (click)="login()"
                             class="w-100 fs-16 txt-white btn btn-danger py-2 h-3 mb-3">Submit</button>
+                        <button *ngIf="isOTP" type="button" (click)="login()"
+                            class="w-100 fs-16 txt-white btn btn-danger py-2 h-3 mb-3">Verify OTP</button>
                         <p class="text-center txt-white pb-4">Don't have an account ?<a [routerLink]="['/register']">
                                 Register</a>
                         </p>

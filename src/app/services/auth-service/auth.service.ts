@@ -13,7 +13,8 @@ export enum AuthEndPoint {
   FORGOT_PASSWORD = '/user/auth/forgot-password',
   UPDATE_USER_LUDO_NAME = "/user/update-ludo-name",
   GET_CONTACT_DETAILS = "/user-common/contact-us",
-  UPDATE_USER_DETAILS = "/user/user-update"
+  UPDATE_USER_DETAILS = "/user/user-update",
+  VERIFY_OTP = '/user/auth/verify-otp',
 }
 
 @Injectable({
@@ -39,6 +40,11 @@ export class AuthService {
   login(payload: any): Observable<any> {
     return this.httpClient
       .post<any>(this.baseUrl + AuthEndPoint.LOGIN_USER, payload);
+  }
+
+  verifyOTP(payload: any): Observable<any> {
+    return this.httpClient
+      .post<any>(this.baseUrl + AuthEndPoint.VERIFY_OTP, payload);
   }
 
   logout(): void {

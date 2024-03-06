@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
 
-  baseUrl: "http://localhost:3200",
+  // baseUrl: "http://localhost:3300",
   // baseUrl : 'http://51.20.5.31:4100',
-  // baseUrl : 'https://mega-ludo.info'
+  baseUrl : 'https://mega-ludo.info'
 };
 
 /*
@@ -18,3 +18,7 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+// TEST1014650891db9a9d32504b1fb9af80564101
+
+// cfsk_ma_test_e903537bff8bebbcbb92ca35f6788ffd_3177d7f2
