@@ -42,9 +42,11 @@ export class AddWalletComponent  implements OnInit {
       amount : String(this.walletAmount.value)
     }
     this.walletService.addWallet(payload).subscribe((response) => {
+      console.log('response', response)
       if(response?.status == SUCCESS) {
         this.walletAmount.setValue('');
-        this.router.navigate(['/home/transition-history']);
+        window.open(response?.payload?.data?.link_url);
+        // this.router.navigate(['/home/transition-history']);
       } else {
         this.notificationService.showError('Something Went Wrong');
       }

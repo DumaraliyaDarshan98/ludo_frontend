@@ -8,12 +8,13 @@ import { HttpClient } from '@angular/common/http';
 export enum APIEndPOint {
   WALLET_HISTORY = "/user/wallet-history",
   WITHDRAW_HISTORY = "/user/withdraw-history",
-  ADD_WALLET = "/user/add-wallet",
+  ADD_WALLET = "/user/cash-transaction",
   WITHDRAW_REQUEST = "/user/withdraw-request",
   GET_WALLET_AMOUNT = "/user/wallet-amount",
   NOTIFICATION_LIST = "/notification/list",
   REFER_CODE_AND_COMMISSION = "/admin/refer-get-commission",
-  PAGE_NOTIFICATION = '/page-notification/list'
+  PAGE_NOTIFICATION = '/page-notification/list',
+  GET_VERIFY_PAYMENT = '/user/check-transaction-status'
 }
 
 @Injectable({
@@ -59,6 +60,12 @@ export class WalletWithdrawServiceService {
         console.log('response wallet', response)
         this.setUserAmount(response?.payload?.data?.walletAmount)
       });
+  }
+
+  getverifyPayment(id: any): Observable<any> {
+    const url = APIEndPOint.GET_VERIFY_PAYMENT + '/' + String(id);
+    return this.httpClient
+      .get<any>(this.baseUrl + url);
   }
 
   // set notification count

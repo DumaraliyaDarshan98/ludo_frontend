@@ -28,6 +28,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { CancelComponent } from './show-game-code/cancel/cancel.component';
 import { IWonComponent } from './show-game-code/i-won/i-won.component';
 import { ILooseComponent } from './show-game-code/i-loose/i-loose.component';
+import { VerifyPaymentComponent } from './verify-payment/verify-payment.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -51,7 +52,8 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'show-game-code/:gameTableId', component: ShowGameCodeComponent },
   { path: 'game-history', component: GameHistoryComponent },
-  { path: 'notification', component: NotificationComponent }
+  { path: 'notification', component: NotificationComponent },
+  { path: 'verify-payment/:id', component: VerifyPaymentComponent },
 ];
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ const routes: Routes = [
     NotificationComponent,
     CancelComponent,
     IWonComponent,
-    ILooseComponent
+    ILooseComponent,
+    VerifyPaymentComponent
   ],
   imports: [
     CommonModule,
