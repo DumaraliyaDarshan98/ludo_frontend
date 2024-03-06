@@ -8,6 +8,7 @@ import { IWonComponent } from './i-won/i-won.component';
 import { CancelComponent } from './cancel/cancel.component';
 import { ILooseComponent } from './i-loose/i-loose.component';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { WalletWithdrawServiceService } from 'src/app/services/wallet-withdraw-service/wallet-withdraw-service.service';
 
 @Component({
   selector: 'app-show-game-code',
@@ -17,6 +18,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 export class ShowGameCodeComponent implements OnInit {
   battleDetails: any;
   battleId: any;
+  notificationDetails : any;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +26,8 @@ export class ShowGameCodeComponent implements OnInit {
     private notificationService: NotificationService,
     private router: Router,
     private modalService: NgbModal,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private walletService :  WalletWithdrawServiceService
   ) {
     this.route.params.subscribe((params: any) => {
       console.log(typeof params['gameTableId'])
@@ -34,6 +37,7 @@ export class ShowGameCodeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBattleDetails();
+    this.getPageNotification();
   }
 
   getBattleDetails() {
@@ -95,5 +99,14 @@ export class ShowGameCodeComponent implements OnInit {
   shareOnWhatsApp() {
     const url = 'https://web.whatsapp.com/';
     window.open(url, '_blank');
+  }
+
+  getPageNotification() {
+    this.walletService.getPageNotification().subscribe((response) => {
+      if(response?.status == SUCCESS) {
+        this.notificationDetails = response?.payload?.data?.find((ele: any) => ele.page == 'GameCodePage');
+        console.log('this.notificationDetails', this.notificationDetails)
+      }
+    })
   }
 }

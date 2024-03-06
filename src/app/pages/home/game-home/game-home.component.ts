@@ -19,7 +19,7 @@ export class GameHomeComponent implements OnInit {
   walletAmount: any = 0;
   battleList: any[] = [];
   runningBattleList : any[] = [];
-
+  notificationDetails : any;
   battleAmount: FormControl = new FormControl();
 
   constructor(
@@ -49,6 +49,7 @@ export class GameHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBattleList();
+    this.getPageNotification();
   }
 
   // go to rules page
@@ -244,5 +245,14 @@ export class GameHomeComponent implements OnInit {
   // redirect to battle page
   public redirectToCodePage(battleId: number) {
     this.router.navigate([`/home/show-game-code/${battleId}`]);
+  }
+
+  getPageNotification() {
+    this.walletService.getPageNotification().subscribe((response) => {
+      if(response?.status == SUCCESS) {
+        this.notificationDetails = response?.payload?.data?.find((ele: any) => ele.page == 'GameHome');
+        console.log('this.notificationDetails', this.notificationDetails)
+      }
+    })
   }
 }
