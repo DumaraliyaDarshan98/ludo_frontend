@@ -53,7 +53,7 @@
                                 ?</a></p> -->
                         <button *ngIf="!isOTP" type="button" (click)="login()"
                             class="w-100 fs-16 txt-white btn btn-danger py-2 h-3 mb-3">Submit</button>
-                        <button *ngIf="isOTP" type="button" (click)="login()"
+                        <button *ngIf="isOTP" type="button" (click)="verifyOTP()"
                             class="w-100 fs-16 txt-white btn btn-danger py-2 h-3 mb-3">Verify OTP</button>
                         <p class="text-center txt-white pb-4">Don't have an account ?<a [routerLink]="['/register']">
                                 Register</a>
