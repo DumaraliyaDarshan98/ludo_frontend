@@ -22,7 +22,7 @@
                               <div class="small-user">
                                   <img src="../../../../assets/img/author.svg" alt="user-img">
                               </div>
-                              <p class="fs-10 text-center mb-0">{{battleDetails?.gamePlayer[0]?.p_name}}eee</p>
+                              <p class="fs-10 text-center mb-0">{{battleDetails?.gamePlayer[0]?.p_name}}</p>
                           </div>
                           <div class="col-8 d-flex align-items-center  semibold justify-content-center ">
                               V/S
@@ -31,7 +31,7 @@
                               <div class="small-user">
                                   <img src="../../../../assets/img/author.svg" alt="user-img">
                               </div>
-                              <p class="fs-10 text-center mb-0">{{battleDetails?.gamePlayer[1]?.p_name}}eee</p>
+                              <p class="fs-10 text-center mb-0">{{battleDetails?.gamePlayer[1]?.p_name}}</p>
                           </div>
                       </div>
                   </div>
@@ -50,9 +50,30 @@
                     <p class="fs-20 bold">Room Code</p>
                 </div>
                 <div class="col-12 text-center mb-3 d-flex" style="color: red; justify-content: center;">
-                  <div class="d-flex align-items-center alert alert-danger py-2 mb-2" role="alert">
-                    <h3>{{ battleDetails?.game_code }}</h3>
+                  <div *ngIf="!GameCode && battleDetails?.game_owner_id == loginUser?.id" class="d-flex align-items-center alert alert-danger py-2 mb-2" role="alert">
+                    <!-- <h3>{{ battleDetails?.game_code }}</h3> -->
+                    <div class="col-12 cursor-pointer">
+                        <label for="full_name">Enter Game Code</label>
+                        <div class="d-flex align-items-center fs-16 border rounded bg-white p-0 mb-4">
+                            <input class="border w-100 rounded" id="full_name" type="text" [formControl]="game_code">
+                            <!-- <input class="border fs-12 rounded p-2" style="height:40px" type="text"> -->
+                        </div>
+                        <button type="button" class="w-auto btn btn-secondary fs-16 py-2 text-uppercase semibold  me-2" (click)="enterGameCode()">Submit</button>
+                    </div>
                   </div>
+
+                <div *ngIf="!GameCode && battleDetails?.game_owner_id != loginUser?.id"
+                    class="d-flex align-items-center alert alert-danger py-2 mb-2" role="alert">
+                    <!-- <h3>{{ battleDetails?.game_code }}</h3> -->
+                    <div class="col-12 cursor-pointer">
+                        <label for="full_name">Wait For Game Code</label>
+                    </div>
+                </div>
+
+                    <div *ngIf="GameCode" class="d-flex align-items-center alert alert-danger py-2 mb-2" role="alert">
+                        <h3>{{ GameCode }}</h3>
+                    </div>
+
                     <!-- <h3>{{ battleDetails?.game_code }}</h3> -->
                 </div>
                 <div class="col-12 mb-3" style="justify-content: center !important;">

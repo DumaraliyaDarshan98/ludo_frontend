@@ -26,5 +26,11 @@ export class SocketService {
     socket.on('play_game', (response: any) => {
       this.gameService.getAndSetBattleList();
     });
+
+    // Practice assign notification
+    socket.on('generate_game_code', (response: any) => {
+      this.gameService.getBattleByIdSocket(response?.data?.game_table_id);
+      console.log('responseresponse', response?.data?.game_table_id);
+    });
   }
 }

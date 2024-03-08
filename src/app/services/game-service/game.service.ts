@@ -15,7 +15,8 @@ export enum APIEndPOint {
   DELETE_GAME = "/game/cancel-game/BATTLEIID", // delete and reject game
   GET_SINGLE_BATTLE = '/game/get-game-table/BATTLEIID',
   GET_USER_GAME_HISTORY = '/game/get-game-history',
-  GET_CANCEL_RESULT = '/game/cancel-reason-list'
+  GET_CANCEL_RESULT = '/game/cancel-reason-list',
+  ENTER_GAME_CODE = '/game/add-game-code'  
 }
 
 @Injectable({
@@ -27,6 +28,9 @@ export class GameService {
   private battleList = new BehaviorSubject<any>([]);
   gameBattleList$ = this.battleList.asObservable();
 
+  private gameCode = new BehaviorSubject<any>([]);
+  gameCode$ = this.gameCode.asObservable();
+
   // private requestBattleList = new BehaviorSubject<any>([]);
   // requestBattleList$ = this.requestBattleList.asObservable();
 
@@ -34,7 +38,7 @@ export class GameService {
     private httpClient: HttpClient,
     private router: Router,
     private localStorageService: LocalStorageService,
-    private walletService : WalletWithdrawServiceService
+    private walletService: WalletWithdrawServiceService
   ) {
     this.baseUrl = environment.baseUrl;
   }
@@ -80,7 +84,7 @@ export class GameService {
   }
 
   // delete and reject game
-  deleteGame(battleId : any) : Observable<any> {
+  deleteGame(battleId: any): Observable<any> {
     const battleAPI: string = APIEndPOint.DELETE_GAME.replace('BATTLEIID', battleId);
     return this.httpClient
       .delete<any>(this.baseUrl + battleAPI);
@@ -103,4 +107,27 @@ export class GameService {
     return this.httpClient
       .get<any>(this.baseUrl + APIEndPOint.GET_CANCEL_RESULT);
   }
+
+  // after create game enter game code 
+  enterGameCode(payload: any): Observable<any> {
+    return this.httpClient
+      .post<any>(this.baseUrl + APIEndPOint.ENTER_GAME_CODE, payload);
+  }
+
+  // get single game details
+  getBattleByIdSocket(battleId: string): any {
+    const battleAPI: string = APIEndPOint.GET_SINGLE_BATTLE.replace('BATTLEIID', battleId);
+    this.httpClient
+      .get<any>(this.baseUrl + battleAPI).subscribe((response) => {
+        console.log('socket call PAi ', response);
+        if(response?.status == SUCCESS) {
+          this.setGameCode(response?.payload?.data?.game_code);
+        }
+      });
+  }
+
+  setGameCode(code: string) {
+    this.gameCode.next(code);
+  }
+
 }

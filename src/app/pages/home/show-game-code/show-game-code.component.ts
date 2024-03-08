@@ -9,6 +9,8 @@ import { CancelComponent } from './cancel/cancel.component';
 import { ILooseComponent } from './i-loose/i-loose.component';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { WalletWithdrawServiceService } from 'src/app/services/wallet-withdraw-service/wallet-withdraw-service.service';
+import { FormControl } from '@angular/forms';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-show-game-code',
@@ -18,7 +20,11 @@ import { WalletWithdrawServiceService } from 'src/app/services/wallet-withdraw-s
 export class ShowGameCodeComponent implements OnInit {
   battleDetails: any;
   battleId: any;
-  notificationDetails : any;
+  notificationDetails: any;
+  loginUser: any;
+  GameCode : string = "";
+
+  game_code: FormControl = new FormControl('');
 
   constructor(
     private route: ActivatedRoute,
@@ -27,8 +33,11 @@ export class ShowGameCodeComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private clipboard: Clipboard,
-    private walletService :  WalletWithdrawServiceService
+    private walletService: WalletWithdrawServiceService,
+    private localStorageService: LocalStorageService,
   ) {
+    this.loginUser = this.localStorageService.getLogger();
+    this.gameService.gameCode$.subscribe((code) => this.GameCode = code);
     this.route.params.subscribe((params: any) => {
       console.log(typeof params['gameTableId'])
       this.battleId = params['gameTableId'];
@@ -44,6 +53,7 @@ export class ShowGameCodeComponent implements OnInit {
     this.gameService.getBattleById(this.battleId).subscribe((response) => {
       if (response?.status == SUCCESS) {
         this.battleDetails = response?.payload?.data;
+        this.GameCode = response?.payload?.data?.game_code;
         if (this.battleDetails?.is_running == 2) {
           this.router.navigateByUrl('/home/game-home');
         }
@@ -92,7 +102,7 @@ export class ShowGameCodeComponent implements OnInit {
   }
 
   copyToClipboard() {
-    this.clipboard.copy(this.battleDetails?.game_code);
+    this.clipboard.copy(this.GameCode);
     this.notificationService.showSuccess('Copied');
   }
 
@@ -103,9 +113,26 @@ export class ShowGameCodeComponent implements OnInit {
 
   getPageNotification() {
     this.walletService.getPageNotification().subscribe((response) => {
-      if(response?.status == SUCCESS) {
+      if (response?.status == SUCCESS) {
         this.notificationDetails = response?.payload?.data?.find((ele: any) => ele.page == 'GameCodePage');
         console.log('this.notificationDetails', this.notificationDetails)
+      }
+    })
+  }
+
+  enterGameCode() {
+    if (!this.game_code.value) {
+      return this.notificationService.showError('Please Enter Game Code');
+    }
+    const payload = {
+      game_table_id: this.battleId,
+      game_code: this.game_code.value,
+      user_id : this.loginUser.id
+    }
+    this.gameService.enterGameCode(payload).subscribe((response) => {
+      console.log('sdfsdfsdfsdfsdfsdfsdf', response);
+      if(response?.status == SUCCESS) {
+        this.notificationService.showSuccess('Generate Code Successfully');
       }
     })
   }
