@@ -3,3 +3,16 @@
 .small-user{
     height:26px;width: 26px;
 }
+
+.waiting-for-code {
+    animation: blink 100ms infinite alternate ease-in-out;
+}
+
+@keyframes blink {
+    0%{
+        opacity: 0.1;
+    };
+    100%{
+        opacity: 1;
+    }
+}
