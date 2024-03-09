@@ -33,6 +33,7 @@ export class TransitionHistoryComponent implements OnInit {
       if(response?.status == SUCCESS) {
         this.walletHistory = response?.payload?.data;
         this.walletHistory = this.walletHistory.reverse();
+        console.log('this.walletHistory', this.walletHistory);
       } else {
         this.walletHistory = [];
       }

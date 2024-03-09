@@ -66,6 +66,7 @@ export class GameHomeComponent implements OnInit {
         // this.battleList = response?.payload?.data?.gameList || [];
 
         this.battleList = response?.payload?.data;
+        console.log('this.battleList', this.battleList);
 
         this.battleList?.map((element: any) => {
           if(element.status == 3 && ((element?.gamePlayer[0]?.p_id == this.loginUser?.id && element?.gamePlayer[0]?.p_status == 3) || (element?.gamePlayer[1]?.p_id == this.loginUser?.id && element?.gamePlayer[1]?.p_status == 3))) {
@@ -158,9 +159,14 @@ export class GameHomeComponent implements OnInit {
   }
 
   // play game
-  public playGame(battleId: number) {
+  public playGame(battleId: number, amount: any) {
     if (!battleId) {
       return this.notificationService.showError('Error');
+    }
+
+    if (Number(amount) > Number(this.walletAmount)) {
+      console.log("Please Check Wallet Amount.");
+      return this.notificationService.showError('Please Add Amount In Wallet.');
     }
 
     let updatedName: any;

@@ -24,7 +24,9 @@
           <tbody>
             <tr *ngFor="let item of walletHistory; let index = index">
               <td> {{ index + 1 }}</td>
-              <td> Rs. {{ item?.amount || '0' }} </td>
+              <td> Rs. {{ item?.amount || '0' }}
+                <span *ngIf="item?.payment_type" style="color: red;">( {{ item?.payment_type }})</span>
+              </td>
               <td>
                 <span *ngIf="item?.status == 1"
                   class="mb-1 me-2 font-medium bg-light-success text-success">Verify</span>

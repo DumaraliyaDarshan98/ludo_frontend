@@ -23,6 +23,7 @@ export class ShowGameCodeComponent implements OnInit {
   notificationDetails: any;
   loginUser: any;
   GameCode : string = "";
+  loginGameUserDetails : any
 
   game_code: FormControl = new FormControl('');
 
@@ -53,10 +54,16 @@ export class ShowGameCodeComponent implements OnInit {
     this.gameService.getBattleById(this.battleId).subscribe((response) => {
       if (response?.status == SUCCESS) {
         this.battleDetails = response?.payload?.data;
+        this.loginGameUserDetails = this.battleDetails?.gamePlayer?.find((element :any) => element.p_id == this.loginUser?.id);
+
+        console.log('this.loginGameUserDetails', this.loginGameUserDetails);
+
         this.GameCode = response?.payload?.data?.game_code;
+
         if (this.battleDetails?.is_running == 2) {
           this.router.navigateByUrl('/home/game-home');
         }
+
         // localStorage.setItem("id", this.battleId);
         console.log('this.battleDetails', this.battleDetails);
         this.notificationService.showSuccess('Game Code Found');
@@ -75,7 +82,10 @@ export class ShowGameCodeComponent implements OnInit {
     modalRef.componentInstance.battleId = this.battleId;
 
     modalRef.result.then((result) => {
-      console.log('result : resultresult : ', result)
+      if(result) {
+        this.getBattleDetails();
+      }
+      console.log('openWinModal', result)
     })
   }
 
@@ -86,7 +96,10 @@ export class ShowGameCodeComponent implements OnInit {
     modalRef.componentInstance.battleId = this.battleId;
 
     modalRef.result.then((result) => {
-      console.log('result : resultresult : ', result)
+      console.log('openCancelModal ', result);
+      if(result) {
+        this.getBattleDetails();
+      }
     })
   }
 
@@ -97,7 +110,10 @@ export class ShowGameCodeComponent implements OnInit {
     modalRef.componentInstance.battleId = this.battleId;
 
     modalRef.result.then((result) => {
-      console.log('result : resultresult : ', result)
+      if(result) {
+        this.getBattleDetails();
+      }
+      console.log('openLooseModal', result)
     })
   }
 

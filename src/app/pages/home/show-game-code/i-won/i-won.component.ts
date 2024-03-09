@@ -43,7 +43,7 @@ export class IWonComponent implements OnInit {
       } else {
         this.notificationService.showError(response?.message);
       }
-      this.closePopUp();
+      this.closePopUp(true);
     }, (error) => {
       this.notificationService.showError(error?.error?.error?.message || 'Error');
     });

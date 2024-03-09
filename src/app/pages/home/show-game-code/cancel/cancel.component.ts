@@ -42,7 +42,7 @@ export class CancelComponent implements OnInit {
       if(response?.status == SUCCESS) {
         this.notificationService.showSuccess('You Cancel the game');
         this.walletService.getWalletAmount();
-        this.closePopUp();
+        this.closePopUp(true);
       } else {
         this.notificationService.showError('Please After After Some Time');
       }
