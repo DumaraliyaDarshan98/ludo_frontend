@@ -60,7 +60,7 @@
               </div>
             </div>
 
-            <div class="d-flex flex-column  input-group mb-3">
+            <!-- <div class="d-flex flex-column  input-group mb-3">
               <input [type]="password" formControlName="password" class="rounded  w-100 form-control fs-14"
                 placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
               <div>
@@ -82,11 +82,11 @@
                   1 special character!
                 </span>
               </div>
-            </div>
+            </div> -->
 
             <div class="input-group mb-3">
               <input type="text" class="form-control fs-14" placeholder="Code" aria-label="code"
-                formControlName="code" required aria-describedby="basic-addon1">
+                formControlName="code" required aria-describedby="basic-addon1" [readOnly]="referCode">
             </div>
 
             <button type="button" (click)="submitForm()"

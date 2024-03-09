@@ -49,8 +49,21 @@ export class ReferEarnComponent implements OnInit {
     this.notificationService.showSuccess('Copied');
   }
 
+  // shareOnWhatsApp() {
+  //   const url = 'https://web.whatsapp.com/';
+  //   window.open(url, '_blank');
+  // }
+
   shareOnWhatsApp() {
-    const url = 'https://web.whatsapp.com/';
-    window.open(url, '_blank');
+    const mainUrl = "https://test.megaludo24.com/#/register";
+
+    const referUrl = mainUrl + "?refer_code=" +  this.loginUser?.refer_code;
+
+    // Copy text to clipboard
+    this.clipboard.copy(referUrl);
+
+    // Share on WhatsApp
+    const whatsappUrl = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(referUrl);
+    window.open(whatsappUrl, '_blank');
   }
 }

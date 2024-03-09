@@ -118,13 +118,27 @@ export class ShowGameCodeComponent implements OnInit {
   }
 
   copyToClipboard() {
+    if(!this.GameCode){
+      return this.notificationService.showError('Wait For The Game Code');
+    }
     this.clipboard.copy(this.GameCode);
     this.notificationService.showSuccess('Copied');
   }
 
+  // shareOnWhatsApp() {
+  //   const url = 'https://web.whatsapp.com/';
+  //   window.open(url, '_blank');
+  // }
+
   shareOnWhatsApp() {
-    const url = 'https://web.whatsapp.com/';
-    window.open(url, '_blank');
+    if(!this.GameCode){
+      return this.notificationService.showError('Wait For The Game Code');
+    }
+    this.clipboard.copy(this.GameCode);
+
+    // Share on WhatsApp
+    const whatsappUrl = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(this.GameCode);
+    window.open(whatsappUrl, '_blank');
   }
 
   getPageNotification() {
