@@ -29,6 +29,7 @@ import { CancelComponent } from './show-game-code/cancel/cancel.component';
 import { IWonComponent } from './show-game-code/i-won/i-won.component';
 import { ILooseComponent } from './show-game-code/i-loose/i-loose.component';
 import { VerifyPaymentComponent } from './verify-payment/verify-payment.component';
+import { WithdrawHistoryViewComponent } from './withdraw-history-view/withdraw-history-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'game-history', component: GameHistoryComponent },
   { path: 'notification', component: NotificationComponent },
   { path: 'verify-payment/:id', component: VerifyPaymentComponent },
+  { path: 'withdraw-history-view/:id', component: WithdrawHistoryViewComponent },
 ];
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ const routes: Routes = [
     CancelComponent,
     IWonComponent,
     ILooseComponent,
-    VerifyPaymentComponent
+    VerifyPaymentComponent,
+    WithdrawHistoryViewComponent
   ],
   imports: [
     CommonModule,

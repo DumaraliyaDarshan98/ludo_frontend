@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Withdraw Detail</h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle text-nowrap table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>Email : </td>
+                                    <td>{{ withdrawDetials?.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile No. : </td>
+                                    <td>{{ withdrawDetials?.mobile_no }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Bank Name : </td>
+                                    <td>{{ withdrawDetials?.bank_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Branch Name : </td>
+                                    <td>{{ withdrawDetials?.branch }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Account Number : </td>
+                                    <td>{{ withdrawDetials?.account_no}}</td>
+                                </tr>
+                                <tr>
+                                    <td>IFSC Code: </td>
+                                    <td>{{ withdrawDetials?.ifsc }}</td>
+                                </tr>
+                                <tr>
+                                    <td>UPI ID : </td>
+                                    <td>{{ withdrawDetials?.upi }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Amount : </td>
+                                    <td>{{ withdrawDetials?.amount }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status : </td>
+                                    <td>
+                                        <span *ngIf="withdrawDetials?.status == 1"
+                                            class="mb-1 me-2 badge font-medium bg-light-success text-success">Verify</span>
+                                        <span *ngIf="withdrawDetials?.status == 2"
+                                            class="mb-1 me-2 badge font-medium bg-light-danger text-danger">Decline</span>
+                                        <span *ngIf="withdrawDetials?.status == 0"
+                                            class="mb-1 me-2 badge font-medium bg-light-warning text-warning">Pending</span>
+                                        <span *ngIf="withdrawDetials?.status == 3"
+                                            class="mb-1 me-2 badge font-medium bg-light-warning text-warning">Processing</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

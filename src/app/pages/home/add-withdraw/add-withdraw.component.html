@@ -2,57 +2,111 @@
     <div class="row justify-content-center">
         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 mb-4 py-4 bg-g-primary rounded px-4">
             <h3 class="bold text-center text-uppercase mb-4">Add Withdraw</h3>
-          <div class="d-flex align-items-center text-danger fs-14 mb-3">
-            <span class="me-2 fs-16 bold text-dark">Note:</span> बिना KYC करें आप सिर्फ 500 रुपये तक ऐड कर सकते हैं।
-          </div>
-          <div class="row">
-            <div class="col-12">
-                <p class="fs-18 mb-1">Enter Amount</p>
-                <div class="input-group mb-3">
-                    <span class="input-group-text bg-white fs-20 border-0" id="basic-addon1">₹</span>
-                    <input type="text" class="form-control border-0" [formControl]="withdrawAmount" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                  </div>
+            <div class="d-flex align-items-center text-danger fs-14 mb-3">
+                <span class="me-2 fs-16 bold text-dark">Note:</span> बिना KYC करें आप सिर्फ 500 रुपये तक ऐड कर सकते हैं।
             </div>
-            <div class="col-6 mb-3">
-              <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(50)">
-                  <span class="d-block fs-20 semibold">₹ 50</span>
-                  <!-- <span class="fs-18 semibold">50</span> -->
-              </div>
-          </div>
-          <div class="col-6 mb-3">
-              <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(100)">
-                  <span class="d-block fs-20 semibold">₹ 100</span>
-                  <!-- <span class="fs-18 semibold">100</span> -->
-              </div>
-          </div>
-          <div class="col-6 mb-3">
-              <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(200)">
-                  <span class="d-block fs-20 semibold">₹ 200</span>
-                  <!-- <span class="fs-18 semibold">200</span> -->
-              </div>
-          </div>
-          <div class="col-6 mb-3">
-              <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(300)">
-                  <span class="d-block fs-20 semibold">₹ 300</span>
-                  <!-- <span class="fs-18 semibold">300</span> -->
-              </div>
-          </div>
-          <div class="col-6 mb-3">
-              <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(500)">
-                  <span class="d-block fs-20 semibold">₹ 500</span>
-                  <!-- <span class="fs-18 semibold">500</span> -->
-              </div>
-          </div>
-          <div class="col-6 mb-3">
-              <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(1000)">
-                  <span class="d-block fs-20 semibold">₹ 1000</span>
-                  <!-- <span class="fs-18 semibold">1000</span> -->
-              </div>
-          </div>
-            <div class="col-12">
-                <button  class="w-100 btn bg-white bg-secondary text-uppercase fs-18 py-3 semibold  me-2" (click)="withdrawRequest()"> Withdraw NOW</button>
+            <div class="row">
+                <form class="needs-validation" [formGroup]="withdrawForm">
+                    <div class="col-12">
+                        <p class="fs-18 mb-1">Email ID</p>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control border-0" formControlName="email"
+                                placeholder="Enter Your Email ID" aria-label="Email" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="fs-18 mb-1">Mobile No.</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control border-0" formControlName="mobile_no"
+                                placeholder=" Enter Your Mobile No." aria-label="Mobile" aria-describedby="basic-addon1" (keypress)="NumberOnly($event)" [maxlength]="10" [minlength]="10">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="fs-18 mb-1">Account No.</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control border-0" formControlName="account_no"  (keypress)="NumberOnly($event)"
+                                placeholder="Enter Your Account No." aria-label="Account" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="fs-18 mb-1">IFSC Code</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control border-0" formControlName="ifsc"
+                                placeholder="Enter Your IFSC Code" aria-label="Ifsccode" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="fs-18 mb-1">Branch Name</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control border-0" formControlName="branch"
+                                placeholder="Enter Your Branch Name" aria-label="Branchname" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="fs-18 mb-1">Bank Name</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control border-0" formControlName="bank_name"
+                                placeholder="Enter Your Bank Name" aria-label="Bankname" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="fs-18 mb-1">UPI ID</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control border-0" formControlName="upi" placeholder="UPI ID"
+                                aria-label="Enter Your UPI Id" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="col-12">
+                    <p class="fs-18 mb-1">Enter Amount</p>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white fs-20 border-0" id="basic-addon1">₹</span>
+                        <input type="text" class="form-control border-0" [formControl]="withdrawAmount"
+                            placeholder="Enter Withdraw Amount" aria-label="Amount" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(50)">
+                        <span class="d-block fs-20 semibold">₹ 50</span>
+                        <!-- <span class="fs-18 semibold">50</span> -->
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(100)">
+                        <span class="d-block fs-20 semibold">₹ 100</span>
+                        <!-- <span class="fs-18 semibold">100</span> -->
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(200)">
+                        <span class="d-block fs-20 semibold">₹ 200</span>
+                        <!-- <span class="fs-18 semibold">200</span> -->
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(300)">
+                        <span class="d-block fs-20 semibold">₹ 300</span>
+                        <!-- <span class="fs-18 semibold">300</span> -->
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(500)">
+                        <span class="d-block fs-20 semibold">₹ 500</span>
+                        <!-- <span class="fs-18 semibold">500</span> -->
+                    </div>
+                </div>
+                <div class="col-6 mb-3">
+                    <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(1000)">
+                        <span class="d-block fs-20 semibold">₹ 1000</span>
+                        <!-- <span class="fs-18 semibold">1000</span> -->
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="w-100 btn bg-white bg-secondary text-uppercase fs-18 py-3 semibold  me-2"
+                        (click)="withdrawRequest()"> Withdraw NOW</button>
+                </div>
             </div>
-          </div>
-            </div>
+        </div>
     </div>
 </div>

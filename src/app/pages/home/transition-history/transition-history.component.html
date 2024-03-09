@@ -1,74 +1,87 @@
 <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-4">
-        <div class="text-center">
-          <p class="fs-22 text-primary semibold mb-0">Available Balance</p>
-          <p class="mb-0 semibold fs-18"> Rs. {{ totalAmount || '0' }}</p>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-4">
+      <div class="text-center">
+        <p class="fs-22 text-primary semibold mb-0">Available Balance</p>
+        <p class="mb-0 semibold fs-18"> Rs. {{ totalAmount || '0' }}</p>
       </div>
-        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-5">
-            <div class="table-responsive">
-                <table class="table border  fs-14">
-                <thead>
-                    <tr>
-                        <th scope="col" class="fs-16 py-3 bg-g-primary" style="text-align: center;" colspan="4">Wallet History</th>
-                    </tr>
-                  <tr class="bg-fb">
-                    <th  class="bg-fb" scope="col">SR. No.</th>
-                    <th  class="bg-fb" scope="col">Amount</th>
-                    <th  class="bg-fb" scope="col">Status</th>
-                    <th class="bg-fb" scope="col">Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of walletHistory; let index = index">
-                    <td> {{ index + 1 }}</td>
-                    <td> Rs. {{ item?.amount  || '0' }} </td>
-                    <td>
-                      <span *ngIf="item?.status == 1" class="mb-1 me-2 font-medium bg-light-success text-success">Verify</span>
-                      <span *ngIf="item?.status == 2" class="mb-1 me-2 font-medium bg-light-danger text-danger">Decline</span>
-                      <span *ngIf="item?.status == 0" class="mb-1 me-2 font-medium bg-light-warning text-warning">Pending</span>
-                    </td>
-                    <td>{{ item?.created_on  | date: 'dd/MM/YYYY' }}</td>
-                  </tr>
-                  <tr *ngIf="walletHistory?.length == 0">
-                    <td colspan="4" class="text-center">No Record Found.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-        </div>
-        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-5">
-            <div class="table-responsive">
-                <table class="table border  fs-14">
-                <thead>
-                    <tr>
-                        <th scope="col" class="fs-16 py-3 bg-g-primary" style="text-align: center;" colspan="4">Withdraw History</th>
-                    </tr>
-                  <tr>
-                    <th scope="col">SR. No.</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of withdrawHistory; let index = index">
-                    <td> {{ index + 1 }}</td>
-                    <td> Rs. {{ item?.amount  || '0' }} </td>
-                    <td>
-                      <span *ngIf="item?.status == 1" class="mb-1 me-2 font-medium bg-light-success text-success">Verify</span>
-                      <span *ngIf="item?.status == 2" class="mb-1 me-2 font-medium bg-light-danger text-danger">Decline</span>
-                      <span *ngIf="item?.status == 0" class="mb-1 me-2 font-medium bg-light-warning text-warning">Pending</span>
-                    </td>
-                    <td>{{ item?.created_on  | date: 'dd/MM/YYYY' }}</td>
-                  </tr>
-                  <tr *ngIf="withdrawHistory?.length == 0">
-                    <td colspan="4" class="text-center">No Record Found.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-        </div>
     </div>
+    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-5">
+      <div class="table-responsive">
+        <table class="table border  fs-14">
+          <thead>
+            <tr>
+              <th scope="col" class="fs-16 py-3 bg-g-primary" style="text-align: center;" colspan="4">Wallet History
+              </th>
+            </tr>
+            <tr class="bg-fb">
+              <th class="bg-fb" scope="col">SR. No.</th>
+              <th class="bg-fb" scope="col">Amount</th>
+              <th class="bg-fb" scope="col">Status</th>
+              <th class="bg-fb" scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of walletHistory; let index = index">
+              <td> {{ index + 1 }}</td>
+              <td> Rs. {{ item?.amount || '0' }} </td>
+              <td>
+                <span *ngIf="item?.status == 1"
+                  class="mb-1 me-2 font-medium bg-light-success text-success">Verify</span>
+                <span *ngIf="item?.status == 2" class="mb-1 me-2 font-medium bg-light-danger text-danger">Decline</span>
+                <span *ngIf="item?.status == 0"
+                  class="mb-1 me-2 font-medium bg-light-warning text-warning">Pending</span>
+              </td>
+              <td>{{ item?.created_on | date: 'dd/MM/YYYY' }}</td>
+            </tr>
+            <tr *ngIf="walletHistory?.length == 0">
+              <td colspan="4" class="text-center">No Record Found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 mb-5">
+      <div class="table-responsive">
+        <table class="table border  fs-14">
+          <thead>
+            <tr>
+              <th scope="col" class="fs-16 py-3 bg-g-primary" style="text-align: center;" colspan="5">Withdraw History
+              </th>
+            </tr>
+            <tr>
+              <th scope="col">SR. No.</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date</th>
+              <th scope="col">View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of withdrawHistory; let index = index">
+              <td> {{ index + 1 }}</td>
+              <td> Rs. {{ item?.amount || '0' }} </td>
+              <td>
+                <span *ngIf="item?.status == 1"
+                  class="mb-1 me-2 font-medium bg-light-success text-success">Verify</span>
+                <span *ngIf="item?.status == 2" class="mb-1 me-2 font-medium bg-light-danger text-danger">Decline</span>
+                <span *ngIf="item?.status == 0"
+                  class="mb-1 me-2 font-medium bg-light-warning text-warning">Pending</span>
+              </td>
+              <td>{{ item?.created_on | date: 'dd/MM/YYYY' }}</td>
+              <td>
+                <button class="btn btn-secondary d-flex align-items-center" type="button"
+                  (click)="viewWithdrawHisptory(item?.id)">View</button>
+                <!-- <a href="javascript:;" class="actionbtn mr-2" (click)="viewWithdrawHisptory()"><i
+                        class="bi bi-eye-fill" aria-hidden="true"></i></a> -->
+              </td>
+            </tr>
+            <tr *ngIf="withdrawHistory?.length == 0">
+              <td colspan="5" class="text-center">No Record Found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

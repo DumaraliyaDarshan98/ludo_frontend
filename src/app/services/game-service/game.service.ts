@@ -16,7 +16,8 @@ export enum APIEndPOint {
   GET_SINGLE_BATTLE = '/game/get-game-table/BATTLEIID',
   GET_USER_GAME_HISTORY = '/game/get-game-history',
   GET_CANCEL_RESULT = '/game/cancel-reason-list',
-  ENTER_GAME_CODE = '/game/add-game-code'  
+  ENTER_GAME_CODE = '/game/add-game-code',
+  WITHDRAW_VIEW_DETAIL = '/user/withdraw-details',
 }
 
 @Injectable({
@@ -120,10 +121,23 @@ export class GameService {
     this.httpClient
       .get<any>(this.baseUrl + battleAPI).subscribe((response) => {
         console.log('socket call PAi ', response);
-        if(response?.status == SUCCESS) {
+        if (response?.status == SUCCESS) {
           this.setGameCode(response?.payload?.data?.game_code);
         }
       });
+  }
+
+  // get single game details
+  // getWithdrawDetialsView(battleId: string): any {
+  //   const battleAPI: string = APIEndPOint.WITHDRAW_VIEW_DETAIL;
+  //   this.httpClient
+  //     .get<any>(this.baseUrl + battleAPI).subscribe((response) => {
+  //     });
+  // }
+
+  getWithdrawDetialsView(withdrawId: any): Observable<any> {
+    const apiUrl = APIEndPOint.WITHDRAW_VIEW_DETAIL + '/'+  String(withdrawId);   
+    return this.httpClient.get<any>(this.baseUrl + apiUrl);
   }
 
   setGameCode(code: string) {

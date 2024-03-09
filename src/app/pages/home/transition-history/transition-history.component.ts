@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletWithdrawServiceService } from 'src/app/services/wallet-withdraw-service/wallet-withdraw-service.service';
 import { SUCCESS } from '../../constant/response-status.const';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transition-history',
@@ -14,7 +15,8 @@ export class TransitionHistoryComponent implements OnInit {
   totalAmount : any = 0;
 
   constructor (
-    private walletService : WalletWithdrawServiceService
+    private walletService : WalletWithdrawServiceService,
+    private router : Router
   ) {
     this.walletService.userTotalAmount$.subscribe((amount) => this.totalAmount = amount);
   }
@@ -53,4 +55,9 @@ export class TransitionHistoryComponent implements OnInit {
       this.withdrawHistory = [];
     });
   }
+
+  viewWithdrawHisptory(id:any) {
+    this.router.navigate(['home/withdraw-history-view', id]);
+  }
+
 }
