@@ -1,3 +1,4 @@
+import { Payload } from './../../constant/payload.const';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,7 +14,7 @@ import { SUCCESS } from '../../constant/response-status.const';
 })
 export class AddWithdrawComponent implements OnInit {
   loginUser!: any;
-
+  accountDetails : any;
   withdrawAmount: FormControl = new FormControl('');
 
   constructor(
@@ -25,7 +26,9 @@ export class AddWithdrawComponent implements OnInit {
     this.loginUser = this.localStorageService.getLogger();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getAccountDetails();
+  }
 
   withDrawForm = {
     email: new FormControl(""),
@@ -42,6 +45,21 @@ export class AddWithdrawComponent implements OnInit {
   // Set amount
   setAmount(amount: number) {
     this.withdrawAmount.setValue(amount);
+  }
+
+  getAccountDetails() {
+    this.walletService.getAccountDetails().subscribe((response) => {
+      console.log(response);
+      if(response?.status == SUCCESS) {
+          this.withdrawForm.get('email')?.setValue(response?.payload?.data?.email || null);
+          this.withdrawForm.get('mobile_no')?.setValue(response?.payload?.data?.mobile_no || null);
+          this.withdrawForm.get('account_no')?.setValue(response?.payload?.data?.account_no || null);
+          this.withdrawForm.get('ifsc')?.setValue(response?.payload?.data?.ifsc || null);
+          this.withdrawForm.get('branch')?.setValue(response?.payload?.data?.branch || null);
+          this.withdrawForm.get('bank_name')?.setValue(response?.payload?.data?.bank_name || null);
+          this.withdrawForm.get('upi')?.setValue(response?.payload?.data?.upi || null);
+      }
+    });
   }
 
   //  add wallet amount
