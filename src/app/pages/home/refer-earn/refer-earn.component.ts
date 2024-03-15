@@ -34,8 +34,8 @@ export class ReferEarnComponent implements OnInit {
     this.walletService.getReferCommission().subscribe((response) => {
       if(response?.status == SUCCESS) {
         this.notificationService.showSuccess('Get Successfully Refer Commission');
-        this.referCommission = response?.payload?.data?.commissionDetails;
-        this.referUser =  response?.payload?.data?.referUserCount;
+        this.referCommission = response?.payload?.data?.commission;
+        this.referUser =  response?.payload?.data?.referUser;
       } else {
         this.notificationService.showError('Error');
       }

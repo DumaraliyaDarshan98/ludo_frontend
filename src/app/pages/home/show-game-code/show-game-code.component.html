@@ -52,12 +52,17 @@
                 <div class="col-12 text-center mb-3 d-flex" style="color: red; justify-content: center;">
                   <div *ngIf="!GameCode && battleDetails?.game_owner_id == loginUser?.id" class="d-flex align-items-center alert alert-danger py-2 mb-2" role="alert">
                     <!-- <h3>{{ battleDetails?.game_code }}</h3> -->
-                    <div class="col-12 cursor-pointer">
+                    <div class="col-12 cursor-pointer" [formGroup]="gameCodeForm">
+                      <!-- <form [formGroup]="gameCodeForm"> -->
                         <label for="full_name">Enter Game Code</label>
                         <div class="d-flex align-items-center fs-16 border rounded bg-white p-0 mb-4">
-                            <input class="border w-100 rounded" id="full_name" type="text" [formControl]="game_code">
+                            <input class="border w-100 rounded" id="full_name" type="text" formControlName="game_code" (keypress)="NumberOnly($event)" [maxlength]="8" [minlength]="8">
                             <!-- <input class="border fs-12 rounded p-2" style="height:40px" type="text"> -->
                         </div>
+                        <p style="color: red;" *ngIf="gameCodeForm?.get('game_code')?.hasError('invalidGameCode')">
+                          Please enter a valid game code with 8 digits starting with 0.
+                        </p>
+                      <!-- </form> -->
                         <button type="button" class="w-auto btn btn-secondary fs-16 py-2 text-uppercase semibold  me-2" (click)="enterGameCode()">Submit</button>
                     </div>
                   </div>
@@ -102,9 +107,9 @@
 <div class="container">
     <div class="row justify-content-center">
       <div *ngIf="loginGameUserDetails?.p_status == '3'" class="col-12 d-flex align-items-center justify-content-center text-center mb-3">
-        <button class="btn btn-primary fs-16 py-3 text-uppercase semibold mt-1 me-2" (click)="openWinModal()"> I Won</button>
-        <button class="btn btn-primary fs-16 py-3 text-uppercase mt-1 semibold  me-2" (click)="openLooseModal()"> I Loose</button>
-        <button class="btn btn-primary fs-16 py-3 text-uppercase mt-1 semibold  me-2" (click)="openCancelModal()"> Cancel</button>
+        <button *ngIf="opponentPlayerDetails?.p_status != '6'" class="btn btn-primary fs-16 py-3 text-uppercase semibold mt-1 me-2" (click)="openWinModal()"> I Won</button>
+        <button *ngIf="opponentPlayerDetails?.p_status != '7'" class="btn btn-primary fs-16 py-3 text-uppercase mt-1 semibold  me-2" (click)="openLooseModal()"> I Loose</button>
+        <button *ngIf="battleDetails?.gamePlayer[0]?.p_status == '3' && battleDetails?.gamePlayer[1]?.p_status == '3'" class="btn btn-primary fs-16 py-3 text-uppercase mt-1 semibold  me-2" (click)="openCancelModal()"> Cancel</button>
       </div>
       <!-- loginGameUserDetails?.p_status == '3' -->
       <div *ngIf="loginGameUserDetails?.p_status == '6'"  class="col-12 d-flex align-items-center justify-content-center text-center mb-3">

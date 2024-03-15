@@ -12,7 +12,7 @@ export enum APIEndPOint {
   WITHDRAW_REQUEST = "/user/withdraw-request",
   GET_WALLET_AMOUNT = "/user/wallet-amount",
   NOTIFICATION_LIST = "/notification/list",
-  REFER_CODE_AND_COMMISSION = "/admin/refer-get-commission",
+  REFER_CODE_AND_COMMISSION = "/user/refer-details",
   PAGE_NOTIFICATION = '/page-notification/list',
   GET_VERIFY_PAYMENT = '/user/check-transaction-status',
   GET_ACCOUNT_DETAILS = "/user/get-account-details"

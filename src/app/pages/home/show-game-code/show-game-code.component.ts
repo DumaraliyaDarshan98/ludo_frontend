@@ -9,7 +9,7 @@ import { CancelComponent } from './cancel/cancel.component';
 import { ILooseComponent } from './i-loose/i-loose.component';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { WalletWithdrawServiceService } from 'src/app/services/wallet-withdraw-service/wallet-withdraw-service.service';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
@@ -22,10 +22,13 @@ export class ShowGameCodeComponent implements OnInit {
   battleId: any;
   notificationDetails: any;
   loginUser: any;
-  GameCode : string = "";
-  loginGameUserDetails : any
+  GameCode: string = "";
+  loginGameUserDetails: any;
+  opponentPlayerDetails : any;
 
-  game_code: FormControl = new FormControl('');
+  // game_code: FormControl = new FormControl('');
+  gameCodeForm: FormGroup;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -36,13 +39,37 @@ export class ShowGameCodeComponent implements OnInit {
     private clipboard: Clipboard,
     private walletService: WalletWithdrawServiceService,
     private localStorageService: LocalStorageService,
+    private fb: FormBuilder
   ) {
     this.loginUser = this.localStorageService.getLogger();
     this.gameService.gameCode$.subscribe((code) => this.GameCode = code);
     this.route.params.subscribe((params: any) => {
       console.log(typeof params['gameTableId'])
       this.battleId = params['gameTableId'];
-    })
+    });
+
+    this.gameCodeForm = this.fb.group({
+      game_code: new FormControl('', Validators.compose([Validators.required, this.validateGameCode()]))
+    });
+  }
+
+  validateGameCode(): ValidatorFn | any {
+    return (control: FormControl): { [key: string]: any } | null => {
+      const code = control.value;
+      if (code && code.length === 8 && code.charAt(0) === '0') {
+        return null; // Validation passed
+      } else {
+        return { invalidGameCode: true }; // Validation failed
+      }
+    };
+  }
+
+  NumberOnly(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
   }
 
   ngOnInit(): void {
@@ -54,8 +81,8 @@ export class ShowGameCodeComponent implements OnInit {
     this.gameService.getBattleById(this.battleId).subscribe((response) => {
       if (response?.status == SUCCESS) {
         this.battleDetails = response?.payload?.data;
-        this.loginGameUserDetails = this.battleDetails?.gamePlayer?.find((element :any) => element.p_id == this.loginUser?.id);
-
+        this.loginGameUserDetails = this.battleDetails?.gamePlayer?.find((element: any) => element.p_id == this.loginUser?.id);
+        this.opponentPlayerDetails = this.battleDetails?.gamePlayer?.find((element: any) => element.p_id != this.loginUser?.id);
         console.log('this.loginGameUserDetails', this.loginGameUserDetails);
 
         this.GameCode = response?.payload?.data?.game_code;
@@ -82,7 +109,7 @@ export class ShowGameCodeComponent implements OnInit {
     modalRef.componentInstance.battleId = this.battleId;
 
     modalRef.result.then((result) => {
-      if(result) {
+      if (result) {
         this.getBattleDetails();
       }
       console.log('openWinModal', result)
@@ -97,7 +124,7 @@ export class ShowGameCodeComponent implements OnInit {
 
     modalRef.result.then((result) => {
       console.log('openCancelModal ', result);
-      if(result) {
+      if (result) {
         this.getBattleDetails();
       }
     })
@@ -110,7 +137,7 @@ export class ShowGameCodeComponent implements OnInit {
     modalRef.componentInstance.battleId = this.battleId;
 
     modalRef.result.then((result) => {
-      if(result) {
+      if (result) {
         this.getBattleDetails();
       }
       console.log('openLooseModal', result)
@@ -118,7 +145,7 @@ export class ShowGameCodeComponent implements OnInit {
   }
 
   copyToClipboard() {
-    if(!this.GameCode){
+    if (!this.GameCode) {
       return this.notificationService.showError('Wait For The Game Code');
     }
     this.clipboard.copy(this.GameCode);
@@ -131,7 +158,7 @@ export class ShowGameCodeComponent implements OnInit {
   // }
 
   shareOnWhatsApp() {
-    if(!this.GameCode){
+    if (!this.GameCode) {
       return this.notificationService.showError('Wait For The Game Code');
     }
     this.clipboard.copy(this.GameCode);
@@ -151,19 +178,27 @@ export class ShowGameCodeComponent implements OnInit {
   }
 
   enterGameCode() {
-    if (!this.game_code.value) {
+    this.gameCodeForm.markAllAsTouched();
+    if (this.gameCodeForm.invalid) {
+      return this.notificationService.showError('Please enter valid game code.');
+    }
+    if (!this.gameCodeForm.get('game_code')?.value) {
       return this.notificationService.showError('Please Enter Game Code');
     }
     const payload = {
       game_table_id: this.battleId,
-      game_code: this.game_code.value,
-      user_id : this.loginUser.id
+      game_code: this.gameCodeForm.get('game_code')?.value,
+      user_id: this.loginUser.id
     }
     this.gameService.enterGameCode(payload).subscribe((response) => {
       console.log('sdfsdfsdfsdfsdfsdfsdf', response);
-      if(response?.status == SUCCESS) {
+      if (response?.status == SUCCESS) {
         this.notificationService.showSuccess('Generate Code Successfully');
+      } else {
+        this.notificationService.showError('Please Retry After Some Time!');
       }
+    }, (error) => {
+      this.notificationService.showError(error?.error?.error?.message || 'Something went wrong!');
     })
   }
 }
