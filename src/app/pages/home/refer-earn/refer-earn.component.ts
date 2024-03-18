@@ -15,6 +15,7 @@ export class ReferEarnComponent implements OnInit {
   referCommission : any;
   loginUser : any;
   referUser : number = 0;
+  referAmount : number = 0;
 
   constructor(
     private router: Router,
@@ -36,6 +37,7 @@ export class ReferEarnComponent implements OnInit {
         this.notificationService.showSuccess('Get Successfully Refer Commission');
         this.referCommission = response?.payload?.data?.commission;
         this.referUser =  response?.payload?.data?.referUser;
+        this.referAmount = response?.payload?.data?.referAmount;
       } else {
         this.notificationService.showError('Error');
       }
