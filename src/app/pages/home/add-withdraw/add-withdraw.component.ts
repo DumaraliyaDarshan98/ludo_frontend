@@ -73,6 +73,7 @@ export class AddWithdrawComponent implements OnInit {
 
     }
     this.walletService.withdrawRequest({ user_id: this.loginUser?.id, amount: String(this.withdrawAmount.value), ...this.withdrawForm.value }).subscribe((response) => {
+      console.log('response', response);
       if (response?.status == SUCCESS) {
         this.withdrawAmount.setValue('');
         this.router.navigate(['/home/transition-history']);
