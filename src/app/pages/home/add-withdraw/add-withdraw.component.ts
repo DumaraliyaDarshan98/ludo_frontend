@@ -16,6 +16,8 @@ export class AddWithdrawComponent implements OnInit {
   loginUser!: any;
   accountDetails : any;
   withdrawAmount: FormControl = new FormControl('');
+  bankDetails : any;
+  showDetails : boolean = false;
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -51,6 +53,12 @@ export class AddWithdrawComponent implements OnInit {
     this.walletService.getAccountDetails().subscribe((response) => {
       console.log(response);
       if(response?.status == SUCCESS) {
+          this.bankDetails = response?.payload?.data;
+          if(this.bankDetails) {
+            this.showDetails = false;
+          } else {
+            this.showDetails = true;
+          }
           this.withdrawForm.get('email')?.setValue(response?.payload?.data?.email || null);
           this.withdrawForm.get('mobile_no')?.setValue(response?.payload?.data?.mobile_no || null);
           this.withdrawForm.get('account_no')?.setValue(response?.payload?.data?.account_no || null);
@@ -64,14 +72,14 @@ export class AddWithdrawComponent implements OnInit {
 
   //  add wallet amount
   withdrawRequest() {
+    this.withdrawForm.markAllAsTouched();
     if (!this.withdrawAmount.value) {
       return this.notificationService.showError('Please Enter Amount');
     }
-    const payload = {
-      user_id: this.loginUser?.id,
-      amount: String(this.withdrawAmount.value),
-
+    if (!this.withdrawForm.get('email')?.value ||  !this.withdrawForm.get('mobile_no')?.value || !this.withdrawForm.get('account_no')?.value || !this.withdrawForm.get('ifsc')?.value || !this.withdrawForm.get('branch')?.value || !this.withdrawForm.get('bank_name')?.value || !this.withdrawForm.get('upi')?.value) {
+      return this.notificationService.showError('Please Fill The Bank Details');
     }
+
     this.walletService.withdrawRequest({ user_id: this.loginUser?.id, amount: String(this.withdrawAmount.value), ...this.withdrawForm.value }).subscribe((response) => {
       console.log('response', response);
       if (response?.status == SUCCESS) {

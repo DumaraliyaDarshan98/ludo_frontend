@@ -3,10 +3,20 @@
         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 mb-4 py-4 bg-g-primary rounded px-4">
             <h3 class="bold text-center text-uppercase mb-4">Add Withdraw</h3>
             <div class="d-flex align-items-center text-danger fs-14 mb-3">
-                <span class="me-2 fs-16 bold text-dark">Note:</span> बिना KYC करें आप सिर्फ 500 रुपये तक ऐड कर सकते हैं।
+                <span class="me-2 fs-16 bold text-dark">Note:</span> Minimum Withdraw Amount  Rs.190
             </div>
+            <div class="d-flex align-items-end fs-14 mb-3" style="justify-content: end;">
+              <button type="button" class="btn bg-primary bg-primary text-uppercase" style="color: white;" (click)="showDetails = !showDetails">
+                <ng-container *ngIf="showDetails">
+                  Hide Bank Details
+                </ng-container>
+                <ng-container *ngIf="!showDetails">
+                  Show Bank Details
+                </ng-container>
+              </button>
+          </div>
             <div class="row">
-                <form class="needs-validation" [formGroup]="withdrawForm">
+                <form class="needs-validation" [formGroup]="withdrawForm" *ngIf="showDetails">
                     <div class="col-12">
                         <p class="fs-18 mb-1">Email ID</p>
                         <div class="input-group mb-3">
@@ -66,9 +76,9 @@
                             placeholder="Enter Withdraw Amount" aria-label="Amount" aria-describedby="basic-addon1">
                     </div>
                 </div>
-                <div class="col-12">
+                <!-- <div class="col-12">
                   <p class="fs-18 mb-1" style="color: red;">Minimum Withdraw Amount  Rs.190 </p>
-              </div>
+                </div> -->
                 <!-- <div class="col-6 mb-3">
                     <div class="bg-white p-4 rounded cursor-pointer" (click)="setAmount(50)">
                         <span class="d-block fs-20 semibold">₹ 50</span>
